@@ -1,4 +1,4 @@
-# Netvigator
+# NETogether 넷투게더
 by 글솝net
 
 ## 아이디어 1
