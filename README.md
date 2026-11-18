@@ -36,9 +36,9 @@ by 글솝net
 | **Java 21 · Spring Boot** | Java로 백엔드 코드 작성. Spring Boot로 브라우저 요청을 받고 결과를 반환하는 웹 서버 구성. |
 | **PostgreSQL 17** | 모집글, 모집 역할, 지원서 등을 저장할 DB로 사용. |
 | **Docker Compose** | `compose.yaml`에 PostgreSQL 버전과 실행 설정을 적어 둠. 팀원 각자가 같은 설정으로 개발용 DB를 켤 수 있음. |
-| **Flyway** | Spring Boot가 시작할 때 아직 적용되지 않은 SQL 파일을 실행해 DB 테이블을 생성하거나 변경함. 현재 첫 SQL 파일로 사용자·모집글·지원서 등의 테이블 생성. |
+| **Flyway** | Spring Boot가 시작할 때 아직 적용되지 않은 SQL 파일을 실행해 DB 테이블 생성/변경. 현재 첫 SQL 파일로 사용자·모집글·지원서 등의 테이블 생성. |
 | **JdbcClient** | Java 코드에서 PostgreSQL에 SQL을 실행할 때 사용. 현재 모집글 목록 조회에 사용 중. |
-| **Gradle** | Spring Boot, PostgreSQL 드라이버 등 필요한 라이브러리를 관리하고 백엔드를 빌드·실행할 때 사용함. |
+| **Gradle** | Spring Boot, PostgreSQL 드라이버 등 필요한 라이브러리를 관리하고 백엔드를 빌드·실행할 때 사용. |
 
 
 ## 팀원 모으기 플랫폼
