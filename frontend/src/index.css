@@ -25,8 +25,8 @@
    굵기는 300(상단바), 700(홈 메인 문구·h1~h3), 500(나머지)만 써요. */
 /* Layout: 1098px 본문 틀. 따뜻한 흰 바탕 위에 색은 '흐릿한 질감 + 선명한 화면 조각'에만. 지표는 1px 세로선 + 작은 번호. 끝은 숯색 목적지. */
 :root{
-  --ink:#1a1a1a; --nav:#515151; --muted:#7c7c7c; --dim:#656565;
-  --rule:#e3e3e2; --rule-a:rgba(38,38,35,.1); --dark-rule:rgba(243,243,245,.06);
+  --ink:#1a1a1a; --nav:#444444; --muted:#5f5f5f; --dim:#b4b4b0;
+  --rule:#e3e3e2; --rule-a:rgba(38,38,35,.1); --dark-rule:rgba(243,243,245,.16);
   --pale:#f0f0ee; --canvas:#f8f8f7; --white:#ffffff;
   --cyan:#00a2c7; --blue:#0052ff; --green:#3fae5a; --rose:#e7799b; --violet:#8a6cf0; --ochre:#e0a43a;
   --red:#c2412d;
@@ -184,10 +184,10 @@ nav.top .btn{font-weight:300}
 .sg{display:inline-flex;align-items:center;gap:6px}
 .dots{display:inline-flex;gap:2px}
 .dots i{width:9px;height:9px;border-radius:2px;background:var(--ink)}
-.dots i.e{background:transparent;outline:1px dashed var(--muted);outline-offset:-1px}
+.dots i.e{background:transparent;outline:1px dashed var(--nav);outline-offset:-1px}
 .tag{display:inline-flex;align-items:center;height:20px;padding:0 6px;border-radius:3px;font-size:11px;background:var(--pale);color:var(--ink);white-space:nowrap}
 .tag.m{background:var(--ink);color:var(--canvas)}
-.tag.off{background:transparent;outline:1px solid var(--rule);color:var(--muted)}
+.tag.off{background:transparent;outline:1px solid #c9c9c6;color:var(--muted)}
 .more{display:flex;justify-content:center;margin-top:28.8px}
 .empty{padding:56px 0;text-align:center;color:var(--muted);border-block:1px solid var(--rule-a)}
 
@@ -209,8 +209,8 @@ nav.top .btn{font-weight:300}
 .fgrid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));margin-top:clamp(80px,9vw,115px);border-right:1px solid var(--dark-rule)}
 .fcol{border-left:1px solid var(--dark-rule);padding:0 8.1px;min-height:300px;display:flex;flex-direction:column;gap:6px}
 .fcol .lab{font-size:11px;color:var(--dim);margin-bottom:auto;padding-bottom:40px}
-.fcol a{font-size:13px;line-height:1.8;color:#f0f0ee;text-decoration:none;opacity:.85}
-.fcol a:hover{opacity:1}
+.fcol a{font-size:13px;line-height:1.8;color:#f6f6f4;text-decoration:none;text-underline-offset:3px}
+.fcol a:hover{text-decoration:underline}
 .fcol .idx{color:var(--dim);margin-top:auto;padding-top:40px}
 .wordmark{display:block;width:100%;height:auto;margin-top:clamp(80px,9vw,115px)}
 .disclose{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:48px 28px;font-size:11px;color:var(--dim)}
@@ -247,7 +247,7 @@ nav.top .btn{font-weight:300}
 .rrow2 .act{display:flex;gap:5.4px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
 .seats{display:flex;flex-wrap:wrap;gap:5.4px;margin-top:12px}
 .seat{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 10px 0 4px;border-radius:3.6px;background:var(--pale);font-size:12.5px}
-.seat.e{background:transparent;outline:1px dashed var(--muted);outline-offset:-1px;color:var(--muted);padding:0 12px}
+.seat.e{background:transparent;outline:1px dashed var(--nav);outline-offset:-1px;color:var(--muted);padding:0 12px}
 .seat.e.hl{outline-color:var(--ink);color:var(--ink)}
 
 /* 폼 */

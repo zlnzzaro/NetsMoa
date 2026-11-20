@@ -32,7 +32,7 @@ export default function Footer() {
         <svg className="wordmark" viewBox="0 0 1098 236" aria-hidden="true">
           <text x="549" y="200" textAnchor="middle" fontFamily="GmarketSans, sans-serif" fontWeight="700"
             fontSize="212" letterSpacing="-12" textLength="1090" lengthAdjust="spacingAndGlyphs"
-            fill="rgba(255,255,255,.05)">NETogether</text>
+            fill="rgba(255,255,255,.09)">NETogether</text>
         </svg>
 
         <div className="disclose">
