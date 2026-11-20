@@ -2,6 +2,7 @@
 import { Link, useNavigate } from 'react-router-dom'
 import Avatar from '../common/Avatar'
 import SeatsLine from './SeatsLine'
+import SkillChips from '../common/SkillChips'
 import { categoryLabel, filledTotalOf, isOpen, pad2, timeAgo, totalOf } from '../../utils/post'
 
 export default function PostItem({ post, index }) {
@@ -24,7 +25,7 @@ export default function PostItem({ post, index }) {
         <p className="sum">{post.description.split('\n')[0]}</p>
         <SeatsLine post={post} />
         <div className="foot">
-          <span className="cap">{post.techStack.join(' · ')}</span>
+          <SkillChips skills={post.techStack} />
           <Link className="btn s" to={`/posts/${post.id}`}>자세히 보기</Link>
         </div>
       </div>

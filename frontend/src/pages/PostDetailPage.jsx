@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom'
 import Avatar from '../components/common/Avatar'
 import Icon from '../components/common/Icon'
 import RoleRow from '../components/post/RoleRow'
+import SkillChips from '../components/common/SkillChips'
 import ApplyModal from '../components/application/ApplyModal'
 import ChatDrawer from '../components/application/ChatDrawer'
 import useLoad from '../hooks/useLoad'
@@ -28,6 +29,7 @@ export default function PostDetailPage() {
 
   const filled = filledTotalOf(post)
   const total = totalOf(post)
+  const myStackHits = post.techStack.filter((s) => me.skills.includes(s)).length
 
   const onApply = async (intro) => {
     await apply(post.id, applyRole.id, intro)
@@ -55,7 +57,12 @@ export default function PostDetailPage() {
           </div>
           <h1 className="display d-title">{post.title}</h1>
           <p className="d-desc statement">{post.description}</p>
-          <p className="cap" style={{ marginTop: 14.4 }}>{post.techStack.join(' · ')}</p>
+          {post.techStack.length > 0 && (
+            <div className="d-stack">
+              <SkillChips skills={post.techStack} highlight={me.skills} />
+              {myStackHits > 0 && <span className="cap">진한 칩은 내 기술스택과 겹치는 기술이에요 ({myStackHits}개)</span>}
+            </div>
+          )}
 
           <div className="roles">
             <span className="cap">모집 역할 · 빈 자리는 점선이에요</span>

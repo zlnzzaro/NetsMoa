@@ -1,6 +1,7 @@
 // 상세 화면의 역할 한 줄: 역할 이름, 인원, 자리(사람/빈 자리), 오른쪽에 지원 버튼이나 내 상태.
 import Avatar from '../common/Avatar'
 import StatusBadge from '../common/StatusBadge'
+import SkillChips from '../common/SkillChips'
 import { isMatch, isOpen, pad2, roleLabel } from '../../utils/post'
 import { useMe } from '../../context/MeContext'
 
@@ -45,7 +46,7 @@ export default function RoleRow({ post, role, index, onApply, onCancel, onChat }
           <span className="cap">{role.members.length}/{role.capacity}명</span>
           {matched && <span className="tag m">내 스택과 매칭</span>}
         </div>
-        {role.skills.length > 0 && <p className="rs">{role.skills.join(' · ')}</p>}
+        <SkillChips className="rs" skills={role.skills} highlight={me.skills} />
         <div className="seats">
           {role.members.map((m) => (
             <span className="seat" key={m.id}><Avatar user={m.id === me.id ? me : m} size="s" />{m.nickname}</span>

@@ -1,6 +1,7 @@
 // 작성자 화면에서 지원자 한 명을 보여 주는 줄 + 면담/확정/종료 버튼.
 import Avatar from '../common/Avatar'
 import StatusBadge from '../common/StatusBadge'
+import SkillChips from '../common/SkillChips'
 import { useMe } from '../../context/MeContext'
 
 export default function ApplicantRow({ application: a, roleFull, onAction }) {
@@ -32,7 +33,7 @@ export default function ApplicantRow({ application: a, roleFull, onAction }) {
           <StatusBadge status={a.status} />
         </div>
         <p>{a.message}</p>
-        <p className="cap stk">{a.applicant.skills.join(' · ')}</p>
+        <SkillChips className="stk" skills={a.applicant.skills} />
       </div>
       <div className="acts">{buttons}</div>
     </div>

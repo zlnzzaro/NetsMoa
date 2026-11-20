@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Avatar from '../common/Avatar'
+import SkillChips from '../common/SkillChips'
 import { useMe } from '../../context/MeContext'
 import { useToast } from '../../context/ToastContext'
 
@@ -70,7 +71,7 @@ export default function ProfileMenu() {
             </label>
             <div><span style={{ fontSize: 15 }}>{me.nickname}</span><small>{me.bio}</small></div>
           </div>
-          <div className="stk">내 기술스택 · {me.skills.join(', ')}</div>
+          <div className="stk">내 기술스택<SkillChips skills={me.skills} /></div>
           <hr />
           <label className="item" htmlFor="photoInput">프로필 사진 바꾸기</label>
           {me.photoUrl && (

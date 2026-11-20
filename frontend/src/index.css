@@ -188,6 +188,13 @@ nav.top .btn{font-weight:300}
 .tag{display:inline-flex;align-items:center;height:22px;padding:0 7px;border-radius:3px;font-size:12px;background:var(--pale);color:var(--ink);white-space:nowrap}
 .tag.m{background:var(--ink);color:var(--canvas)}
 .tag.off{background:transparent;outline:1px solid #c9c9c6;color:var(--muted)}
+/* 기술스택 칩 (SkillChips) */
+.chips{display:flex;flex-wrap:wrap;gap:4px;list-style:none;margin:0;padding:0}
+.chip{display:inline-flex;align-items:center;height:22px;padding:0 7px;border-radius:3px;font-size:12px;line-height:1;background:var(--white);outline:1px solid var(--rule);outline-offset:-1px;color:var(--ink);white-space:nowrap}
+.chip.hit{background:var(--ink);outline-color:var(--ink);color:var(--canvas)}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.d-stack{margin-top:14.4px;display:grid;gap:6px;justify-items:start}
+.menu .stk .chips{margin-top:6px}
 .more{display:flex;justify-content:center;margin-top:28.8px}
 .empty{padding:56px 0;text-align:center;color:var(--muted);border-block:1px solid var(--rule-a)}
 
