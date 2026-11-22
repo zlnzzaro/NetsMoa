@@ -282,12 +282,172 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
 .mg{max-width:760px;margin-bottom:48px}
 .mg .head{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;flex-wrap:wrap}
 .mg .head h2{font-size:18px}
-.ap{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:14.4px;border-top:1px solid var(--rule-a);padding:16px 0 20px;align-items:start}
-.ap:last-child{border-bottom:1px solid var(--rule-a)}
-.ap .nm{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:14.5px}
-.ap p{font-size:13.5px;color:var(--muted);margin-top:4px}
-.ap .stk{font-size:12px;margin-top:6px}
-.ap .acts{display:flex;gap:5.4px;flex-wrap:wrap;justify-content:flex-end}
+
+/* 지원자 관리 */
+
+/* 모집 상태 안내 */
+.notice {
+  position: relative;
+  overflow: hidden;
+  max-width: 760px;
+  margin-bottom: 40px;
+  padding: 17px 20px;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--cyan);
+  border-radius: 6px;
+  background: var(--white);
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+
+.notice b {
+  color: var(--ink);
+  margin-right: 5px;
+}
+
+/* 역할별 지원자 영역 */
+.mg {
+  max-width: 760px;
+  margin-bottom: 32px;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--white);
+}
+
+/* 역할 제목 */
+.mg .head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 19px 20px;
+  border-bottom: 1px solid var(--rule);
+  background: var(--canvas);
+}
+
+.mg .head .idx {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.mg .head h2 {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.4;
+  letter-spacing: -.025em;
+}
+
+.mg .head .cap {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* 지원자가 없는 경우 */
+.mg .none {
+  margin: 0;
+  padding: 24px 20px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* 지원자 카드 */
+.ap {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 15px;
+  padding: 20px;
+  border-bottom: 1px solid var(--rule);
+  transition: background .2s ease;
+}
+
+.ap:last-child {
+  border-bottom: 0;
+}
+
+.ap:hover {
+  background: var(--canvas);
+}
+
+/* 지원자 이름과 상태 */
+.ap .nm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.ap .nm .tag {
+  font-size: 11px;
+}
+
+/* 지원 메시지 */
+.ap p {
+  margin-top: 9px;
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.7;
+  word-break: keep-all;
+}
+
+/* 기술 스택 */
+.ap .stk {
+  margin-top: 12px;
+  font-size: 12px;
+}
+
+/* 관리 버튼 */
+.ap .acts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 7px;
+  max-width: 220px;
+  padding-top: 2px;
+}
+
+/* 모바일 */
+@media (max-width: 640px) {
+  .notice {
+    margin-bottom: 28px;
+    padding: 14px;
+  }
+
+  .mg {
+    margin-bottom: 24px;
+  }
+
+  .mg .head {
+    padding: 16px 14px;
+    gap: 8px;
+  }
+
+  .mg .head .cap {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .ap {
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: 12px;
+    padding: 17px 14px;
+  }
+
+  .ap .acts {
+    grid-column: 2 / -1;
+    justify-content: flex-start;
+    max-width: none;
+    padding-top: 5px;
+  }
+}
 
 /* 팀 확정 */
 
