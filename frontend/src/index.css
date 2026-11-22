@@ -290,13 +290,161 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
 .ap .acts{display:flex;gap:5.4px;flex-wrap:wrap;justify-content:flex-end}
 
 /* 팀 확정 */
-.team-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:40px;align-items:center;padding-block:40px 72px}
-.members{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-right:1px solid var(--rule-a);margin-bottom:72px}
-.mem{border-left:1px solid var(--rule-a);padding:0 8.1px;min-height:200px;display:flex;flex-direction:column;justify-content:space-between;gap:14px}
-.mem h3{font-size:16px;margin-top:10px}
-.chatlink{display:flex;gap:5.4px;flex-wrap:wrap;align-items:center;max-width:760px;margin-bottom:115px}
-.chatlink code{flex:1 1 260px;min-width:0;height:36px;display:flex;align-items:center;padding:0 10.8px;border-radius:3.6px;background:var(--pale);font-family:inherit;font-size:14px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.locked{max-width:760px;border-left:1px solid var(--rule-a);border-right:1px solid var(--rule-a);padding:28px 8.1px;color:var(--muted);display:grid;gap:14px;justify-items:start;margin-bottom:115px}
+
+/* 팀 확정 페이지 */
+.team-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 32px;
+  align-items: center;
+  padding-block: 32px 48px;
+}
+
+/* 팀원 목록 */
+.members {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 44px;
+  background: var(--white);
+}
+
+.mem {
+  min-width: 0;
+  min-height: 165px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  border-left: 1px solid var(--rule);
+  background: var(--white);
+  transition: background .2s ease;
+}
+
+.mem:first-child {
+  border-left: 0;
+}
+
+.mem:hover {
+  background: var(--canvas);
+}
+
+.mem h3 {
+  margin-top: 10px;
+  font-size: 17px;
+  line-height: 1.4;
+  letter-spacing: -.025em;
+}
+
+.mem .cap {
+  display: inline-block;
+  margin-top: 5px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.mem .idx {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* 팀 채팅방 */
+.chatlink,
+.locked {
+  max-width: 760px;
+  padding: 20px;
+  margin-bottom: 80px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--white);
+}
+
+.chatlink {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.chatlink code {
+  flex: 1 1 260px;
+  min-width: 0;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  background: var(--canvas);
+  font-family: inherit;
+  font-size: 13px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.chatlink .pair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.locked {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* 모바일 */
+@media (max-width: 640px) {
+  .team-top {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-block: 24px 36px;
+  }
+
+  .team-top > *:last-child {
+    justify-self: center;
+  }
+
+  .members {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-bottom: 32px;
+  }
+
+  .mem {
+    min-height: 145px;
+    padding: 15px;
+  }
+
+  .mem:nth-child(odd) {
+    border-left: 0;
+  }
+
+  .mem:nth-child(n+3) {
+    border-top: 1px solid var(--rule);
+  }
+
+  .chatlink,
+  .locked {
+    padding: 15px;
+    margin-bottom: 56px;
+  }
+
+  .chatlink .pair {
+    width: 100%;
+  }
+
+  .chatlink .pair .btn {
+    flex: 1;
+    text-align: center;
+  }
+}
 
 /* 모달 · 채팅 */
 .overlay{position:fixed;inset:0;background:rgba(26,26,26,.28);z-index:50;display:grid;place-items:center;padding:16px}
