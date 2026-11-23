@@ -19,12 +19,12 @@ const FEATURES = [
   {
     title: '두 사람만 보는 대화로 정해요', kind: 'chat',
     text: '작성자와 지원자 둘만 보는 채팅에서 이야기해 보고 합류를 정해요.',
-    link: ['내 모집글', '/posts/p-1/manage'],
+    link: ['내 모집글', '/mine'],
   },
   {
     title: '자리가 다 차면 팀 채팅이 열려요', kind: 'full',
     text: '정원이 차면 모집이 알아서 닫히고, 팀원에게만 팀 채팅 링크가 보여요.',
-    link: ['내 팀', '/posts/p-1/team'],
+    link: ['내 팀', '/mine#teams'],
   },
 ]
 

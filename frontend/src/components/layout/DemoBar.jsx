@@ -2,11 +2,12 @@
 // 시연이 끝나면 App.jsx 에서 <DemoBar /> 한 줄만 지우면 돼요.
 import { NavLink, useMatch } from 'react-router-dom'
 import { pad2 } from '../../utils/post'
+import { DEMO_POST_ID } from '../../lib/supabase'
 
 export default function DemoBar() {
-  // 지금 보고 있는 모집글 id (없으면 첫 번째 글)
+  // 지금 보고 있는 모집글 id (없으면 시연용 대표 글)
   const m = useMatch('/posts/:id/*')
-  const id = m?.params.id ?? 'p-1'
+  const id = m?.params.id ?? DEMO_POST_ID
   const steps = [
     ['/', '목록'],
     [`/posts/${id}`, '지원'],

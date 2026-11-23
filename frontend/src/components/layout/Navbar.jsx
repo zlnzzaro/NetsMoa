@@ -14,8 +14,7 @@ export default function Navbar() {
           <Link className="logo" to="/"><span className="mk" />NETogether</Link>
           <NavLink className={cls} to="/" end>팀원 찾기</NavLink>
           <NavLink className={cls} to="/board">게시판</NavLink>
-          <NavLink className={(s) => `${cls(s)} hide-m`} to="/posts/p-1/manage">내 모집글</NavLink>
-          <NavLink className={(s) => `${cls(s)} hide-m`} to="/posts/p-1/team">내 팀</NavLink>
+          <NavLink className={(s) => `${cls(s)} hide-m`} to="/mine" end>내 활동</NavLink>
           <div className="spacer" />
           <Link className="btn p wbtn" to="/write" aria-label="모집글 쓰기">
             <Icon name="plus" size={13} /><span>모집글 쓰기</span>

@@ -1,8 +1,8 @@
 // 지원·면담·승인 관련 서버 호출 함수.
 // 상태 5단계: PENDING(검토 대기) → CHATTING(면담 중) → ACCEPTED(합류 확정)
 //            REJECTED(선발 종료), CANCELED(신청 취소)
-import { posts, postRoles, applications, messages, ME_ID } from '../mocks/data'
-import { ACTIVE_STATUSES } from '../constants/codes'
+import { posts, postRoles, applications, messages, ME_ID } from '../../mocks/data'
+import { ACTIVE_STATUSES } from '../../constants/codes'
 
 let seq = 100
 const appOf = (id) => applications.find((a) => a.id === id)
@@ -84,3 +84,6 @@ export async function undo(applicationId) {
   app.status = 'PENDING'
   posts.find((p) => p.id === app.postId).status = 'OPEN'
 }
+
+// 체험 모드에는 실시간 연결이 없어요 (채팅 창이 직접 다시 불러와요)
+export const subscribeMessages = () => () => {}

@@ -24,3 +24,14 @@ export async function saveMyPhoto(dataUrl) {
   }
   return dataUrl
 }
+
+// ── 체험 모드: 로그인 없이 항상 '유진'으로 들어와 있어요 ──
+const demoOnly = async () => {
+  throw new Error('체험 모드에서는 로그인 없이 유진 계정으로 둘러볼 수 있어요')
+}
+export const signIn = demoOnly
+export const signUp = demoOnly
+export const signOut = demoOnly
+export const isNicknameAvailable = async () => true
+export const onAuthChange = () => () => {}
+export const hasSession = async () => true

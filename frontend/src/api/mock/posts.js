@@ -1,7 +1,7 @@
 // 모집글 관련 서버 호출 함수 (목록, 상세, 등록).
 // 화면(pages/)은 mocks 를 직접 읽지 않고 항상 이 함수들만 불러요.
 // 백엔드가 생기면 함수 안쪽만 fetch('/api/posts') 같은 코드로 바꾸면 돼요.
-import { users, posts, postRoles, applications, messages, teamSpaces, ME_ID } from '../mocks/data'
+import { users, posts, postRoles, applications, messages, teamSpaces, ME_ID } from '../../mocks/data'
 
 const userOf = (id) => users.find((u) => u.id === id)
 

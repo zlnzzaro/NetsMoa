@@ -13,6 +13,8 @@ import { getPost } from '../api/posts'
 import { apply, cancel } from '../api/applications'
 import { categoryLabel, filledTotalOf, isOpen, percentOf, roleLabel, shortDate, timeAgo, totalOf } from '../utils/post'
 import { useMe } from '../context/MeContext'
+import useLoginGate from '../hooks/useLoginGate'
+import { isDemoMode } from '../lib/supabase'
 import { useToast } from '../context/ToastContext'
 import NotFound from './NotFound'
 
@@ -20,7 +22,8 @@ export default function PostDetailPage() {
   const { id } = useParams()
   const { me } = useMe()
   const toast = useToast()
-  const { data: post, error, reload } = useLoad(() => getPost(id), [id])
+  const gate = useLoginGate()
+  const { data: post, error, reload } = useLoad(() => getPost(id), [id, me.id])
   const [applyRole, setApplyRole] = useState(null) // 지원 창을 연 역할
   const [chat, setChat] = useState(null) // 면담 채팅을 연 지원서
 
@@ -31,16 +34,26 @@ export default function PostDetailPage() {
   const total = totalOf(post)
   const myStackHits = post.techStack.filter((s) => me.skills.includes(s)).length
 
+  const isAuthor = post.authorId === me.id
+
   const onApply = async (intro) => {
-    await apply(post.id, applyRole.id, intro)
+    try {
+      await apply(post.id, applyRole.id, intro)
+      toast('지원했어요. 지금은 검토 대기 상태예요')
+    } catch (err) {
+      toast(err.message)
+    }
     setApplyRole(null)
     reload()
-    toast('지원했어요. 지금은 검토 대기 상태예요')
   }
   const onCancel = async (app) => {
-    await cancel(app.id)
+    try {
+      await cancel(app.id)
+      toast('지원을 취소했어요')
+    } catch (err) {
+      toast(err.message)
+    }
     reload()
-    toast('지원을 취소했어요')
   }
 
   return (
@@ -68,7 +81,7 @@ export default function PostDetailPage() {
             <span className="cap">모집 역할 · 빈 자리는 점선이에요</span>
             {post.roles.map((r, i) => (
               <RoleRow key={r.id} post={post} role={r} index={i}
-                onApply={setApplyRole} onCancel={onCancel} onChat={(app) => setChat({ app, role: r })} />
+                onApply={(role) => gate(() => setApplyRole(role))} onCancel={onCancel} onChat={(app) => setChat({ app, role: r })} />
             ))}
           </div>
         </div>
@@ -89,8 +102,8 @@ export default function PostDetailPage() {
             <span className="idx">01</span>
           </div>
           <div className="pair">
-            <Link className="btn s" to={`/posts/${post.id}/manage`}>작성자 화면</Link>
-            <Link className="btn s" to={`/posts/${post.id}/team`}>팀 확정 화면</Link>
+            {(isAuthor || isDemoMode) && <Link className="btn s" to={`/posts/${post.id}/manage`}>지원자 관리</Link>}
+            {(post.isMember || isDemoMode) && <Link className="btn s" to={`/posts/${post.id}/team`}>팀 화면</Link>}
           </div>
         </aside>
       </div>

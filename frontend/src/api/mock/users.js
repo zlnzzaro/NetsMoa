@@ -1,8 +1,8 @@
 // 내 정보(회원) 관련 서버 호출 함수.
 // 화면(pages/)은 mocks 를 직접 읽지 않고 항상 이 함수들만 불러요.
 // 백엔드가 생기면 함수 안쪽만 fetch('/api/users/me') 같은 코드로 바꾸면 돼요.
-import { users, passwords, ME_ID } from '../mocks/data'
-import { USER_ROLE, MAX_SKILLS } from '../constants/codes'
+import { users, passwords, ME_ID } from '../../mocks/data'
+import { USER_ROLE, MAX_SKILLS } from '../../constants/codes'
 
 // 서버가 돌려줄 모양 그대로 골라 담아요. (비밀번호 같은 값은 절대 넣지 않아요)
 function toMe(u) {
