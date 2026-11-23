@@ -17,6 +17,16 @@ export const ROLE = {
   OTHER: '기타',
 }
 
+// 내 정보의 '희망 역할' (여러 개 고를 수 있어요)
+// 모집글 역할(ROLE)과 따로 둬요. 겹치는 코드(FRONTEND, BACKEND, DESIGN)는 이름을 똑같이 맞춰 두었어요.
+// DB users 테이블에는 아직 이 칸이 없어서 백엔드에 추가를 요청해야 해요.
+export const USER_ROLE = {
+  FRONTEND: { name: '프론트엔드', desc: '화면과 사용자 경험을 만들어요' },
+  BACKEND: { name: '백엔드', desc: '서버·DB·API를 만들어요' },
+  PM: { name: 'PM', desc: '일정과 방향을 정리해요' },
+  DESIGN: { name: '디자인', desc: '화면 구성과 디자인을 맡아요' },
+}
+
 // 지원 상태 5단계
 export const APPLICATION_STATUS = {
   PENDING: '검토 대기',
