@@ -1,5 +1,5 @@
 // 내 정보 화면 (주소: /me). 프로필 메뉴의 '내 정보'를 누르면 와요.
-// 닉네임, 이메일, 학번, 한 줄 소개, 기술스택을 보여 줘요.
+// 닉네임, 이메일, 학번, 한 줄 소개, 기술스택, 희망 역할을 보여 줘요.
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Icon from '../components/common/Icon'
@@ -9,6 +9,7 @@ import PasswordForm from '../components/me/PasswordForm'
 import PhotoField from '../components/me/PhotoField'
 import useLoad from '../hooks/useLoad'
 import { getMe } from '../api/users'
+import { USER_ROLE } from '../constants/codes'
 
 // 비어 있는 값은 회색으로 '아직 없어요'
 const orNone = (v) => v || <span className="muted">아직 없어요</span>
@@ -64,6 +65,16 @@ export default function MyPage() {
               <span className="lab">기술스택</span>
               <div className="val">
                 {me.skills.length > 0 ? <SkillChips skills={me.skills} /> : orNone(null)}
+              </div>
+            </div>
+            <div className="frow">
+              <span className="lab">희망 역할</span>
+              <div className="val">
+                {me.roles.length > 0 ? (
+                  <ul className="chips" aria-label="희망 역할">
+                    {me.roles.map((code) => <li key={code} className="tag">{USER_ROLE[code]?.name ?? code}</li>)}
+                  </ul>
+                ) : orNone(null)}
               </div>
             </div>
 
