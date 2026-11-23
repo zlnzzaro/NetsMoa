@@ -2,6 +2,7 @@
 // 화면(pages/)은 mocks 를 직접 읽지 않고 항상 이 함수들만 불러요.
 // 백엔드가 생기면 함수 안쪽만 fetch('/api/users/me') 같은 코드로 바꾸면 돼요.
 import { users, passwords, ME_ID } from '../mocks/data'
+import { USER_ROLE } from '../constants/codes'
 
 // 서버가 돌려줄 모양 그대로 골라 담아요. (비밀번호 같은 값은 절대 넣지 않아요)
 function toMe(u) {
@@ -12,6 +13,7 @@ function toMe(u) {
     studentId: u.studentId,
     bio: u.bio,
     skills: [...u.skills],
+    roles: [...(u.roles || [])], // 희망 역할 코드 (USER_ROLE)
   }
 }
 
@@ -31,7 +33,7 @@ function apiError(status, message) {
 
 // 내 정보 수정 — PATCH /api/users/me
 // 보낸 값만 바꿔요. 다른 사람이 쓰는 닉네임이면 409 오류를 던져요.
-export async function updateMe({ nickname, bio, skills }) {
+export async function updateMe({ nickname, bio, skills, roles }) {
   const me = users.find((u) => u.id === ME_ID)
   // 닉네임 검사를 먼저 해요 (실패하면 아무것도 안 바뀌게)
   if (nickname !== undefined) {
@@ -42,6 +44,8 @@ export async function updateMe({ nickname, bio, skills }) {
   }
   if (bio !== undefined) me.bio = bio.trim()
   if (skills !== undefined) me.skills = [...new Set(skills)]
+  // 정해진 코드만, USER_ROLE 순서대로 저장해요
+  if (roles !== undefined) me.roles = Object.keys(USER_ROLE).filter((code) => roles.includes(code))
   return toMe(me)
 }
 
