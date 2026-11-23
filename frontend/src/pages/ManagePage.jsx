@@ -10,16 +10,37 @@ import { getPost } from '../api/posts'
 import { accept, reject, startChat, undo } from '../api/applications'
 import { pad2, roleLabel } from '../utils/post'
 import { useToast } from '../context/ToastContext'
+import { useMe } from '../context/MeContext'
+import { isDemoMode } from '../lib/supabase'
 import NotFound from './NotFound'
 
 export default function ManagePage() {
   const { id } = useParams()
   const toast = useToast()
-  const { data: post, error, reload } = useLoad(() => getPost(id), [id])
+  const { me, isGuest } = useMe()
+  const { data: post, error, reload } = useLoad(() => getPost(id), [id, me.id])
   const [chat, setChat] = useState(null)
 
   if (error) return <NotFound />
   if (!post) return null
+
+  // 지원자 정보는 작성자만 볼 수 있어요 (체험 모드는 시연을 위해 누구나)
+  if (post.authorId !== me.id && !isDemoMode) {
+    return (
+      <div className="frame page">
+        <Link className="back" to={`/posts/${post.id}`}><Icon name="left" />모집글</Link>
+        <div className="intro">
+          <h1 className="display">작성자만 볼 수 있는 화면이에요</h1>
+          <p className="statement">{post.title} · 작성자 {post.author.nickname}님이 지원자를 관리하는 곳이에요.</p>
+          <div className="pair">
+            {isGuest
+              ? <Link className="btn p" to={`/login?next=/posts/${post.id}/manage`}>로그인</Link>
+              : <Link className="btn s" to="/mine">내 모집글 보기</Link>}
+          </div>
+        </div>
+      </div>
+    )
+  }
 
   const count = post.roles.reduce((sum, r) => sum + r.applications.length, 0)
   const closed = post.status === 'CLOSED'
@@ -27,11 +48,16 @@ export default function ManagePage() {
   // 지원자 줄에서 누른 버튼 처리
   const onAction = async (type, app, role) => {
     const name = app.applicant.nickname
-    if (type === 'chat') { await startChat(app.id, post.authorId); reload(); setChat({ app, role }) }
-    if (type === 'openChat') setChat({ app, role })
-    if (type === 'accept') { const notice = await accept(app.id); reload(); toast(notice === '합류를 확정했어요' ? `${name}님 합류를 확정했어요` : notice) }
-    if (type === 'reject') { await reject(app.id); reload(); toast(`${name}님은 선발 종료로 바뀌었어요`) }
-    if (type === 'undo') { await undo(app.id); reload() }
+    try {
+      if (type === 'chat') { await startChat(app.id, post.authorId); reload(); setChat({ app: { ...app, status: 'CHATTING' }, role }) }
+      if (type === 'openChat') setChat({ app, role })
+      if (type === 'accept') { const notice = await accept(app.id); toast(notice === '합류를 확정했어요' ? `${name}님 합류를 확정했어요` : notice) }
+      if (type === 'reject') { await reject(app.id); toast(`${name}님은 선발 종료로 바뀌었어요`) }
+      if (type === 'undo') { await undo(app.id); toast('검토 대기로 되돌렸어요') }
+    } catch (err) {
+      toast(err.message)
+    }
+    reload()
   }
 
   return (

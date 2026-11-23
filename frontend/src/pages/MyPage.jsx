@@ -1,7 +1,7 @@
 // 내 정보 화면 (주소: /me). 프로필 메뉴의 '내 정보'를 누르면 와요.
 // 닉네임, 이메일, 학번, 한 줄 소개, 기술스택, 희망 역할을 보여 줘요.
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import Icon from '../components/common/Icon'
 import SkillChips from '../components/common/SkillChips'
 import ProfileForm from '../components/me/ProfileForm'
@@ -10,15 +10,19 @@ import PhotoField from '../components/me/PhotoField'
 import useLoad from '../hooks/useLoad'
 import { getMe } from '../api/users'
 import { USER_ROLE } from '../constants/codes'
+import { useMe } from '../context/MeContext'
 
 // 비어 있는 값은 회색으로 '아직 없어요'
 const orNone = (v) => v || <span className="muted">아직 없어요</span>
 
 export default function MyPage() {
-  const { data: me, error, reload } = useLoad(getMe, [])
+  const { isGuest } = useMe()
+  const { data: me, error, reload } = useLoad(() => (isGuest ? Promise.resolve(null) : getMe()), [isGuest])
   // 지금 보여 줄 화면: 'view' 보기 / 'edit' 정보 수정 / 'password' 비밀번호 변경
   const [mode, setMode] = useState('view')
   const toView = () => setMode('view')
+
+  if (isGuest) return <Navigate to="/login?next=/me" replace />
 
   return (
     <div className="frame page">

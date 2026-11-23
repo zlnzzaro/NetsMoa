@@ -26,6 +26,8 @@ export default function RoleRow({ post, role, index, onApply, onCancel, onChat }
         )}
       </>
     )
+  } else if (post.authorId === me.id) {
+    action = null // 내 모집글에는 지원 버튼이 없어요
   } else if (full || !isOpen(post)) {
     action = <span className="tag off">마감</span>
   } else {

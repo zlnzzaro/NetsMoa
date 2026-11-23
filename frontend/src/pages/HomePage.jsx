@@ -1,9 +1,9 @@
 // 첫 화면 (주소: /)
-// 위에서부터: 큰 문구 → 설명 문단 → 세 단계 → 넘겨 보는 모집글 카드
+// 위에서부터: 큰 문구 → 설명 문단 → 기능 소개 4개(스크롤하면 나타남) → 넘겨 보는 모집글 카드
 // 모집글 전체 목록은 게시판(/board)에 있어요.
+import FeatureIntro from '../components/home/FeatureIntro'
 import HeroSection from '../components/home/HeroSection'
 import RecruitCarousel from '../components/home/RecruitCarousel'
-import StepRows from '../components/home/StepRows'
 import useLoad from '../hooks/useLoad'
 import { getPosts } from '../api/posts'
 
@@ -20,7 +20,7 @@ export default function HomePage() {
           NETogether는 필요한 역할과 빈자리를 먼저 보여 줘요.
         </p>
       </section>
-      <StepRows />
+      <FeatureIntro />
       {posts && <RecruitCarousel posts={posts} />}
     </>
   )
