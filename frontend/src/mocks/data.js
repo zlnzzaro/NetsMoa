@@ -4,6 +4,9 @@
 
 export const ME_ID = 'u-yujin'
 
+// 가짜 비밀번호 (비밀번호 변경 흉내용). users 안에 넣으면 모집글 화면 데이터에 같이 섞여 나갈 수 있어서 따로 둬요.
+export const passwords = { 'u-yujin': 'password1234' }
+
 export const users = [
   { id: 'u-yujin', email: 'yujin@example.com', studentId: '2025012345', nickname: '유진', bio: '컴퓨터학부 2학년 · 프론트엔드', skills: ['React', 'JavaScript', 'Figma'] },
   { id: 'u-seojun', nickname: '박서준', bio: '', skills: ['React', 'TypeScript'] },

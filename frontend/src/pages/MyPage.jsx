@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import Icon from '../components/common/Icon'
 import SkillChips from '../components/common/SkillChips'
 import ProfileForm from '../components/me/ProfileForm'
+import PasswordForm from '../components/me/PasswordForm'
 import useLoad from '../hooks/useLoad'
 import { getMe } from '../api/users'
 
@@ -13,7 +14,9 @@ const orNone = (v) => v || <span className="muted">아직 없어요</span>
 
 export default function MyPage() {
   const { data: me, error, reload } = useLoad(getMe, [])
-  const [editing, setEditing] = useState(false) // true 면 입력 폼을 보여 줘요
+  // 지금 보여 줄 화면: 'view' 보기 / 'edit' 정보 수정 / 'password' 비밀번호 변경
+  const [mode, setMode] = useState('view')
+  const toView = () => setMode('view')
 
   return (
     <div className="frame page">
@@ -33,8 +36,10 @@ export default function MyPage() {
           </div>
         ) : !me ? (
           <p className="empty">내 정보를 불러오는 중이에요</p>
-        ) : editing ? (
-          <ProfileForm me={me} onCancel={() => setEditing(false)} onSaved={() => { setEditing(false); reload() }} />
+        ) : mode === 'edit' ? (
+          <ProfileForm me={me} onCancel={toView} onSaved={() => { toView(); reload() }} />
+        ) : mode === 'password' ? (
+          <PasswordForm onCancel={toView} onDone={toView} />
         ) : (
           <>
             <div className="frow">
@@ -61,9 +66,8 @@ export default function MyPage() {
             </div>
 
             <div className="form-foot pair">
-              {/* 비밀번호 변경은 다음 단계에서 연결해요 */}
-              <button className="btn p" onClick={() => setEditing(true)}>정보 수정</button>
-              <button className="btn s" disabled>비밀번호 변경</button>
+              <button className="btn p" onClick={() => setMode('edit')}>정보 수정</button>
+              <button className="btn s" onClick={() => setMode('password')}>비밀번호 변경</button>
             </div>
           </>
         )}
