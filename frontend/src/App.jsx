@@ -6,15 +6,17 @@ import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import DemoBar from './components/layout/DemoBar'
 import HomePage from './pages/HomePage'
+import BoardPage from './pages/BoardPage'
 import PostDetailPage from './pages/PostDetailPage'
 import WritePage from './pages/WritePage'
 import ManagePage from './pages/ManagePage'
 import TeamPage from './pages/TeamPage'
+import MyPage from './pages/MyPage'
 import NotFound from './pages/NotFound'
 import { MeProvider } from './context/MeContext'
 import { ToastProvider } from './context/ToastContext'
 
-// 다른 화면으로 넘어가면 맨 위부터 보여 줘요 (#feed 처럼 위치가 정해진 경우는 빼고)
+// 다른 화면으로 넘어가면 맨 위부터 보여 줘요 (주소에 #위치가 붙은 경우는 빼고)
 function ScrollToTop() {
   const { pathname, hash } = useLocation()
   useEffect(() => { if (!hash) window.scrollTo(0, 0) }, [pathname, hash])
@@ -40,10 +42,12 @@ export default function App() {
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<HomePage />} />
+            <Route path="/board" element={<BoardPage />} />
             <Route path="/write" element={<WritePage />} />
             <Route path="/posts/:id" element={<PostDetailPage />} />
             <Route path="/posts/:id/manage" element={<ManagePage />} />
             <Route path="/posts/:id/team" element={<TeamPage />} />
+            <Route path="/me" element={<MyPage />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

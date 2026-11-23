@@ -83,8 +83,6 @@ nav.top .btn{font-weight:300}
 #avatarBtn[aria-expanded="true"] .av{box-shadow:0 0 0 2px var(--ink)}
 .menu{position:absolute;right:0;top:44px;width:260px;background:var(--canvas);border:1px solid var(--rule-a);border-radius:4px;padding:8px;color:var(--ink)}
 .menu .me{display:flex;gap:12px;align-items:center;padding:10px 8px}
-.menu .me label{position:relative;cursor:pointer}
-.menu .me .edit{position:absolute;right:-6px;bottom:-4px;background:var(--ink);color:var(--canvas);font-size:12px;padding:2px 6px;border-radius:3.6px}
 .menu .me small{display:block;color:var(--muted);font-size:12px}
 .menu .stk{padding:0 8px 10px;font-size:12px;color:var(--muted)}
 .menu hr{border:0;border-top:1px solid var(--rule);margin:4px 0}
@@ -97,6 +95,7 @@ nav.top .btn{font-weight:300}
 .av.s{width:22px;height:22px;font-size:12px}
 .av.l{width:40px;height:40px;font-size:15px}
 .av.xl{width:52px;height:52px;font-size:19px}
+.av.xxl{width:96px;height:96px;font-size:34px}
 
 /* 흐릿한 질감 위의 화면 조각 (vignette) */
 .vg{position:relative;width:var(--w,280px);aspect-ratio:1;max-width:100%;display:grid;place-items:center}
@@ -263,6 +262,8 @@ nav.top .btn{font-weight:300}
 .frow:last-of-type{border-bottom:1px solid var(--rule-a)}
 .frow>label,.frow>.lab{font-size:12.5px;color:var(--muted);padding-top:9px}
 .frow small{display:block;color:var(--muted);font-size:12px;margin-top:6px}
+.frow small.bad{color:var(--red)}
+.frow>.val{padding-top:9px;font-size:14px}
 .inp{width:100%;height:36px;padding:0 10.8px;border-radius:3.6px;border:0;background:var(--pale);outline:0;font-size:14px}
 .inp:focus{outline:1px solid var(--ink)}
 textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;line-height:1.55}
@@ -275,6 +276,28 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
 .icon-btn:hover{background:var(--pale);color:var(--ink)}
 .err{color:var(--red);font-size:13px;margin-top:14px}
 .form-foot{margin-top:21.6px}
+/* 희망 역할 카드 (RolePicker): 세로 줄로 나눈 4칸, 그림자 없음 */
+.role-pick{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-right:1px solid var(--rule-a)}
+.role-card{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0;padding:10px 12px 12px;border:0;border-left:1px solid var(--rule-a);border-radius:0;background:transparent;color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.role-card:hover{background:var(--pale)}
+.role-card .no{font-size:12px;color:var(--dim)}
+.role-card .nm{font-size:15px;letter-spacing:-.02em}
+.role-card .ds{font-size:12px;color:var(--muted)}
+.role-card.on{background:var(--ink);color:var(--canvas)}
+.role-card.on .no,.role-card.on .ds{color:var(--dim)}
+/* 기술스택 상자 (SkillPicker): 분야별로 네모 상자, 고르면 진한 배경 */
+.skill-pick{display:grid;gap:12px}
+.skill-group{display:grid;gap:6px}
+.skill-group .gname{font-size:12px;color:var(--muted)}
+.skill-group .boxes{display:flex;flex-wrap:wrap;gap:6px}
+.skill-box{height:34px;min-width:72px;padding:0 12px;border:0;border-radius:3px;background:var(--white);outline:1px solid var(--rule);outline-offset:-1px;color:var(--ink);font:inherit;font-size:13px;cursor:pointer;white-space:nowrap}
+.skill-box:hover{background:var(--pale)}
+.skill-box.on{background:var(--ink);outline-color:var(--ink);color:var(--canvas)}
+.skill-box:disabled{color:var(--dim);background:var(--white);cursor:not-allowed}
+/* 테두리를 outline 으로 그려서, 키보드 초점 표시를 다시 넣어 줘요 */
+.skill-box:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.skill-add{display:flex;gap:6px;border-top:1px solid var(--rule-a);padding-top:12px}
+.skill-add .inp{flex:1;min-width:0}
 
 /* 지원자 관리 */
 .notice{position:relative;overflow:hidden;border-left:1px solid var(--rule-a);border-right:1px solid var(--rule-a);padding:14px 8.1px;margin-bottom:56px;font-size:13.5px;color:var(--muted);max-width:760px}
@@ -354,6 +377,8 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
   .wbtn span{display:none}
   .frow{grid-template-columns:1fr;gap:4px}
   .frow>label,.frow>.lab{padding-top:0}
+  .role-pick{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .role-card{border-bottom:1px solid var(--rule-a)}
   .rrow{grid-template-columns:minmax(0,1fr) 64px}
   .rrow .rs{grid-column:1/2}
   .rrow2{grid-template-columns:28px minmax(0,1fr)}

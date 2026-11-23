@@ -1,22 +1,14 @@
 // 첫 화면 (주소: /)
-// 위에서부터: 큰 문구 → 설명 문단 → 넘겨 보는 모집글 카드 → 세 단계 → 모집글 목록
-import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+// 위에서부터: 큰 문구 → 설명 문단 → 세 단계 → 넘겨 보는 모집글 카드
+// 모집글 전체 목록은 게시판(/board)에 있어요.
 import HeroSection from '../components/home/HeroSection'
 import RecruitCarousel from '../components/home/RecruitCarousel'
 import StepRows from '../components/home/StepRows'
-import PostFeed from '../components/post/PostFeed'
 import useLoad from '../hooks/useLoad'
 import { getPosts } from '../api/posts'
 
 export default function HomePage() {
   const { data: posts } = useLoad(getPosts, [])
-  const { hash, key } = useLocation()
-
-  // 주소가 /#feed 이면 목록 위치로 내려가요 ("팀 둘러보기" 버튼, 푸터 링크)
-  useEffect(() => {
-    if (hash === '#feed' && posts) document.getElementById('feed')?.scrollIntoView({ behavior: 'smooth' })
-  }, [hash, key, posts])
 
   return (
     <>
@@ -28,13 +20,8 @@ export default function HomePage() {
           NETogether는 필요한 역할과 빈자리를 먼저 보여 줘요.
         </p>
       </section>
-      {posts && (
-        <>
-          <RecruitCarousel posts={posts} />
-          <StepRows />
-          <PostFeed posts={posts} />
-        </>
-      )}
+      <StepRows />
+      {posts && <RecruitCarousel posts={posts} />}
     </>
   )
 }
