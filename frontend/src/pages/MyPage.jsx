@@ -6,6 +6,7 @@ import Icon from '../components/common/Icon'
 import SkillChips from '../components/common/SkillChips'
 import ProfileForm from '../components/me/ProfileForm'
 import PasswordForm from '../components/me/PasswordForm'
+import PhotoField from '../components/me/PhotoField'
 import useLoad from '../hooks/useLoad'
 import { getMe } from '../api/users'
 
@@ -42,6 +43,7 @@ export default function MyPage() {
           <PasswordForm onCancel={toView} onDone={toView} />
         ) : (
           <>
+            <PhotoField />
             <div className="frow">
               <span className="lab">닉네임</span>
               <div className="val">{me.nickname}</div>

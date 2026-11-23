@@ -83,8 +83,6 @@ nav.top .btn{font-weight:300}
 #avatarBtn[aria-expanded="true"] .av{box-shadow:0 0 0 2px var(--ink)}
 .menu{position:absolute;right:0;top:44px;width:260px;background:var(--canvas);border:1px solid var(--rule-a);border-radius:4px;padding:8px;color:var(--ink)}
 .menu .me{display:flex;gap:12px;align-items:center;padding:10px 8px}
-.menu .me label{position:relative;cursor:pointer}
-.menu .me .edit{position:absolute;right:-6px;bottom:-4px;background:var(--ink);color:var(--canvas);font-size:12px;padding:2px 6px;border-radius:3.6px}
 .menu .me small{display:block;color:var(--muted);font-size:12px}
 .menu .stk{padding:0 8px 10px;font-size:12px;color:var(--muted)}
 .menu hr{border:0;border-top:1px solid var(--rule);margin:4px 0}
@@ -97,6 +95,7 @@ nav.top .btn{font-weight:300}
 .av.s{width:22px;height:22px;font-size:12px}
 .av.l{width:40px;height:40px;font-size:15px}
 .av.xl{width:52px;height:52px;font-size:19px}
+.av.xxl{width:96px;height:96px;font-size:34px}
 
 /* 흐릿한 질감 위의 화면 조각 (vignette) */
 .vg{position:relative;width:var(--w,280px);aspect-ratio:1;max-width:100%;display:grid;place-items:center}
