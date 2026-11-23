@@ -22,8 +22,28 @@ export async function getMe() {
   return toMe(me)
 }
 
-// 내 정보 수정 — PATCH /api/users/me (3번에서 만들어요)
-// export async function updateMe({ nickname, bio, skills }) {}
+// 서버 오류 흉내: fetch 로 바꾼 뒤에도 화면은 err.status 로 구분하면 돼요 (409 = 중복, 401 = 비밀번호 틀림)
+function apiError(status, message) {
+  const err = new Error(message)
+  err.status = status
+  return err
+}
+
+// 내 정보 수정 — PATCH /api/users/me
+// 보낸 값만 바꿔요. 다른 사람이 쓰는 닉네임이면 409 오류를 던져요.
+export async function updateMe({ nickname, bio, skills }) {
+  const me = users.find((u) => u.id === ME_ID)
+  // 닉네임 검사를 먼저 해요 (실패하면 아무것도 안 바뀌게)
+  if (nickname !== undefined) {
+    const nick = nickname.trim()
+    if (nick.length < 2 || nick.length > 12) throw apiError(400, '닉네임은 2~12자로 적어 주세요')
+    if (users.some((u) => u.id !== ME_ID && u.nickname === nick)) throw apiError(409, '이미 사용 중인 닉네임이에요')
+    me.nickname = nick
+  }
+  if (bio !== undefined) me.bio = bio.trim()
+  if (skills !== undefined) me.skills = [...new Set(skills)]
+  return toMe(me)
+}
 
 // 비밀번호 변경 — PATCH /api/users/me/password (4번에서 만들어요)
 // export async function changePassword({ currentPassword, newPassword }) {}

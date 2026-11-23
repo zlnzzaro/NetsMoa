@@ -263,6 +263,8 @@ nav.top .btn{font-weight:300}
 .frow:last-of-type{border-bottom:1px solid var(--rule-a)}
 .frow>label,.frow>.lab{font-size:12.5px;color:var(--muted);padding-top:9px}
 .frow small{display:block;color:var(--muted);font-size:12px;margin-top:6px}
+.frow small.bad{color:var(--red)}
+.frow>.val{padding-top:9px;font-size:14px}
 .inp{width:100%;height:36px;padding:0 10.8px;border-radius:3.6px;border:0;background:var(--pale);outline:0;font-size:14px}
 .inp:focus{outline:1px solid var(--ink)}
 textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;line-height:1.55}
