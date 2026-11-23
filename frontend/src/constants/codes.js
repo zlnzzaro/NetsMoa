@@ -50,5 +50,8 @@ export const SKILL_GROUPS = [
   { name: '디자인·협업', skills: ['Figma', 'Git', 'Docker', 'AWS'] },
 ]
 
+// 내 기술스택은 10개까지 (DB users.skills 의 CHECK cardinality(skills) <= 10 과 맞춤)
+export const MAX_SKILLS = 10
+
 // 첫 화면 '내 기술스택으로 찾아보기'에 보여 줄 기술 목록
 export const PICKABLE_SKILLS = ['React', 'JavaScript', 'Spring Boot', 'Python', 'Figma', 'Node.js', 'Flutter', 'C++']
