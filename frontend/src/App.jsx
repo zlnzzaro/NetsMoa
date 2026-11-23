@@ -10,6 +10,7 @@ import PostDetailPage from './pages/PostDetailPage'
 import WritePage from './pages/WritePage'
 import ManagePage from './pages/ManagePage'
 import TeamPage from './pages/TeamPage'
+import MyPage from './pages/MyPage'
 import NotFound from './pages/NotFound'
 import { MeProvider } from './context/MeContext'
 import { ToastProvider } from './context/ToastContext'
@@ -44,6 +45,7 @@ export default function App() {
             <Route path="/posts/:id" element={<PostDetailPage />} />
             <Route path="/posts/:id/manage" element={<ManagePage />} />
             <Route path="/posts/:id/team" element={<TeamPage />} />
+            <Route path="/me" element={<MyPage />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>

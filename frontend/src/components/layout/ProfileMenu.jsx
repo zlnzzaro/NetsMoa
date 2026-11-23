@@ -77,6 +77,7 @@ export default function ProfileMenu() {
           {me.photoUrl && (
             <button className="item" onClick={() => { setPhoto(null); toast('기본 프로필로 돌아갔어요') }}>사진 지우기</button>
           )}
+          <button className="item" onClick={() => go('/me')}>내 정보</button>
           <button className="item" onClick={() => go('/posts/p-1/manage')}>내 모집글 관리</button>
           <button className="item" onClick={() => go('/posts/p-1/team')}>내 팀</button>
           <hr />
