@@ -4,5 +4,5 @@ import * as mock from './mock/auth'
 import * as remote from './remote/auth'
 
 export const {
-  signIn, signUp, signOut, isNicknameAvailable, onAuthChange, hasSession, getMyPhoto, saveMyPhoto,
+  signIn, signUp, signOut, resendSignup, isNicknameAvailable, onAuthChange, hasSession, getMyPhoto, saveMyPhoto,
 } = isDemoMode ? mock : remote

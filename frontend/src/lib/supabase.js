@@ -5,7 +5,22 @@
 import { createClient } from '@supabase/supabase-js'
 
 const url = import.meta.env.VITE_SUPABASE_URL
-const key = import.meta.env.VITE_SUPABASE_ANON_KEY
+const key = import.meta.env.VITE_SUPABASE_ANON_KEY || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY
+
+// 가입을 허용할 학교 이메일 도메인 (DB 의 school_email.sql 과 같아야 해요)
+export const SCHOOL_DOMAIN = (import.meta.env.VITE_SCHOOL_DOMAIN || 'knu.ac.kr').toLowerCase()
+export const isSchoolEmail = (email) => email.trim().toLowerCase().endsWith(`@${SCHOOL_DOMAIN}`)
+
+// 인증 메일 링크로 돌아왔는지 기억해 둬요. (Supabase 가 주소의 #토큰을 읽고 지우기 전에 확인)
+//   성공: #access_token=...&type=signup   실패: #error=...&error_code=otp_expired
+function readAuthRedirect() {
+  if (typeof window === 'undefined') return null
+  const p = new URLSearchParams(window.location.hash.slice(1) || window.location.search.slice(1))
+  if (p.get('error_code') || p.get('error')) return { ok: false, code: p.get('error_code') || p.get('error') }
+  if (p.get('access_token') || p.get('code')) return { ok: true, type: p.get('type') }
+  return null
+}
+export const authRedirect = readAuthRedirect()
 
 export const supabase = url && key ? createClient(url, key) : null
 export const isDemoMode = !supabase
