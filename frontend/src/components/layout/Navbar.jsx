@@ -11,7 +11,7 @@ export default function Navbar() {
       {/* nav-frame: 노트북 이상에서는 화면 전체 폭 (좌우 여백 --edge) */}
       <div className="frame nav-frame">
         <nav className="top">
-          <Link className="logo" to="/"><span className="mk" />NETogether</Link>
+          <Link className="logo" to="/"><span className="mk" />넷츠모아</Link>
           <NavLink className={cls} to="/" end>팀원 찾기</NavLink>
           <NavLink className={cls} to="/board">게시판</NavLink>
           <NavLink className={(s) => `${cls(s)} hide-m`} to="/mine" end>내 활동</NavLink>

@@ -33,7 +33,7 @@ export default function Footer() {
         </div>
 
         <div className="disclose">
-          <span>© 2026 NETogether</span>
+          <span>© 2026 NetsMoa</span>
         </div>
       </div>
     </footer>
