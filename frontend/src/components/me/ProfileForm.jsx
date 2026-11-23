@@ -2,11 +2,10 @@
 // 이메일과 학번은 바꿀 수 없어서 글씨로만 보여 줘요.
 // me: 지금 내 정보 / onSaved: 저장 끝났을 때 / onCancel: 취소 눌렀을 때
 import { useState } from 'react'
-import SkillChips from '../common/SkillChips'
 import RolePicker from './RolePicker'
+import SkillPicker from './SkillPicker'
 import { useMe } from '../../context/MeContext'
 import { useToast } from '../../context/ToastContext'
-import { splitComma } from '../../utils/post'
 
 export default function ProfileForm({ me, onSaved, onCancel }) {
   const { saveProfile } = useMe()
@@ -14,7 +13,7 @@ export default function ProfileForm({ me, onSaved, onCancel }) {
   // 입력칸 값 (처음엔 지금 내 정보로 채워 둬요)
   const [nickname, setNickname] = useState(me.nickname)
   const [bio, setBio] = useState(me.bio || '')
-  const [skillsText, setSkillsText] = useState(me.skills.join(', '))
+  const [skills, setSkills] = useState(me.skills)
   const [roles, setRoles] = useState(me.roles)
   const [nickTaken, setNickTaken] = useState(false) // 중복 닉네임 오류
   const [error, setError] = useState('') // 그 밖의 오류
@@ -22,7 +21,6 @@ export default function ProfileForm({ me, onSaved, onCancel }) {
 
   const nick = nickname.trim()
   const nickOk = nick.length >= 2 && nick.length <= 12
-  const skills = [...new Set(splitComma(skillsText))] // 같은 기술을 두 번 적어도 한 번만
   const changed = nick !== me.nickname || bio.trim() !== (me.bio || '') || skills.join(',') !== me.skills.join(',') ||
     roles.join(',') !== me.roles.join(',')
   const canSave = nickOk && changed && !saving
@@ -69,12 +67,10 @@ export default function ProfileForm({ me, onSaved, onCancel }) {
           placeholder="예: 컴퓨터학부 2학년 · 프론트엔드" />
       </div>
       <div className="frow">
-        <label htmlFor="me-skills">기술스택</label>
+        <span className="lab" id="me-skills">기술스택</span>
         <div>
-          <input className="inp" id="me-skills" value={skillsText} onChange={(e) => setSkillsText(e.target.value)}
-            placeholder="React, JavaScript, Figma" />
-          <small>쉼표로 구분해 주세요</small>
-          {skills.length > 0 && <SkillChips skills={skills} className="d-stack" />}
+          <SkillPicker value={skills} onChange={setSkills} labelledBy="me-skills" />
+          <small>여러 개 고를 수 있어요 · 지금 {skills.length}개 골랐어요</small>
         </div>
       </div>
       <div className="frow">
