@@ -45,7 +45,7 @@ export default function WritePage() {
 
   return (
     <div className="frame page">
-      <Link className="back" to="/"><Icon name="left" />목록</Link>
+      <Link className="back" to="/board"><Icon name="left" />목록</Link>
       <div className="intro">
         <h1 className="display">같이 할 사람을 찾아요</h1>
         <p className="statement">역할마다 몇 명이 필요한지 적으면 지원자가 역할을 골라 지원해요. 인원이 다 차면 자동으로 마감돼요.</p>

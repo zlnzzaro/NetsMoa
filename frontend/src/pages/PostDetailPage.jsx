@@ -45,7 +45,7 @@ export default function PostDetailPage() {
 
   return (
     <div className="frame page">
-      <Link className="back" to="/"><Icon name="left" />목록</Link>
+      <Link className="back" to="/board"><Icon name="left" />목록</Link>
       <div className="split">
         <div>
           <div className="d-meta">

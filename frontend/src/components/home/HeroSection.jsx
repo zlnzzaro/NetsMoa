@@ -24,7 +24,7 @@ export default function HeroSection() {
         <p>역할을 골라 지원하고, 1:1로 이야기한 뒤 합류를 정해요. 자리가 다 차면 모집은 알아서 닫혀요.</p>
         <div className="pair">
           <Link className="btn p" to="/write">모집글 쓰기</Link>
-          <Link className="btn s" to="/#feed">팀 둘러보기</Link>
+          <Link className="btn s" to="/board">팀 둘러보기</Link>
         </div>
       </div>
       <div className="floats-s"><Vignette kind="seats" width={300} /></div>

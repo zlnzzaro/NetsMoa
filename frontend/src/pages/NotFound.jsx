@@ -7,7 +7,7 @@ export default function NotFound() {
       <div className="intro">
         <h1 className="display">찾는 화면이 없어요</h1>
         <p className="statement">주소가 바뀌었거나 지워진 모집글일 수 있어요.</p>
-        <div className="pair"><Link className="btn p" to="/">목록으로</Link></div>
+        <div className="pair"><Link className="btn p" to="/board">목록으로</Link></div>
       </div>
     </div>
   )
