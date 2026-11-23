@@ -6,18 +6,22 @@
 | 파일 | 내용 |
 | --- | --- |
 | `schema.sql` | 테이블, RLS, RPC 함수, 가입 트리거, Realtime 설정 |
+| `school_email.sql` | 회원가입을 학교 이메일(@knu.ac.kr)로만 허용하는 트리거 |
 | `seed.sql` | 시연용 계정 23개 + 모집글 12개 (`frontend/src/mocks/data.js` 와 같은 내용) |
 
 ## 처음 한 번 설정
 
 1. [Supabase](https://supabase.com/dashboard)에서 New project를 만들어요. 리전은 Northeast Asia (Seoul)를 골라요.
 2. **SQL Editor → New query**에 `schema.sql` 전체를 붙여 넣고 Run을 눌러요.
-3. 새 쿼리에 `seed.sql` 전체를 붙여 넣고 Run을 눌러요. 시연 데이터가 필요 없으면 이 단계는 건너뛰어요.
-4. **Authentication → Sign In / Providers → Email**에서 **Confirm email을 꺼요.**
-   Supabase 기본 메일 발송은 한 시간에 몇 통밖에 못 보내서, 켜 두면 가입이 막혀요.
-   (메일 인증이 필요하면 Custom SMTP를 설정한 뒤 켜요.)
-5. **Project Settings → API**에서 Project URL과 `anon`(publishable) 키를 복사해요.
-6. `frontend/.env.local`에 값을 넣어요. 형식은 `frontend/.env.example`을 참고해요.
+3. 새 쿼리에 `school_email.sql`을 붙여 넣고 Run을 눌러요.
+4. 새 쿼리에 `seed.sql` 전체를 붙여 넣고 Run을 눌러요. 시연 계정은 이미 인증된 상태로 들어가요.
+5. **Authentication → Sign In / Providers → Email**에서 **Confirm email을 켜요.**
+6. **Authentication → URL Configuration**
+   - Site URL: 배포 주소 (예: `https://netsmoa.vercel.app`)
+   - Redirect URLs: `http://localhost:5173/**`, `http://127.0.0.1:5173/**`, 배포 주소 + `/**`
+7. **Custom SMTP**: 기본 메일 서버는 우리 Supabase 팀 멤버 주소에만 메일을 보내고 발송량도 아주 적어요. 다른 학생이 가입하려면 SMTP를 설정해야 해요.
+8. **Project Settings → API**에서 Project URL과 `anon`(publishable) 키를 복사해요.
+9. `frontend/.env.local`에 값을 넣어요. 형식은 `frontend/.env.example`을 참고해요.
 
 ```env
 VITE_SUPABASE_URL=https://xxxx.supabase.co
@@ -28,12 +32,12 @@ VITE_SUPABASE_ANON_KEY=eyJ... 또는 sb_publishable_...
 
 ## 시연 계정
 
-모든 계정의 비밀번호는 `netogether1234`예요.
+모든 계정의 비밀번호는 `netsmoa1234`예요.
 
-- `yujin@netogether.dev`: 유진, 지원자 시점
-- `seojun@netogether.dev`: 박서준, '캠퍼스 중고거래 웹' 모집글 작성자 (지원자 관리·합류 확정)
+- `yujin@netsmoa.dev`: 유진, 지원자 시점
+- `seojun@netsmoa.dev`: 박서준, '캠퍼스 중고거래 웹' 모집글 작성자 (지원자 관리·합류 확정)
 
-시연 데이터만 지우려면 `delete from auth.users where email like '%@netogether.dev';`를 실행해요.
+시연 데이터만 지우려면 `delete from auth.users where email like '%@netsmoa.dev';`를 실행해요.
 
 ## 규칙 요약
 

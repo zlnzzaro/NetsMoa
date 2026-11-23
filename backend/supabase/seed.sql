@@ -1,6 +1,6 @@
 -- NETogether 시연용 데이터 (schema.sql 다음에 한 번 실행)
--- 모든 데모 계정 비밀번호: netogether1234
--- 예) yujin@netogether.dev (유진), seojun@netogether.dev (박서준, '캠퍼스 중고거래' 모집글 작성자)
+-- 모든 데모 계정 비밀번호: netsmoa1234
+-- 예) yujin@netsmoa.dev (유진), seojun@netsmoa.dev (박서준, '캠퍼스 중고거래' 모집글 작성자)
 -- 날짜는 실행한 날 기준으로 맞춰져요. 다시 넣고 싶으면 맨 아래 '초기화' 주석을 참고하세요.
 begin;
 
@@ -8,299 +8,299 @@ begin;
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
   raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
   confirmation_token, recovery_token, email_change_token_new, email_change, email_change_token_current, reauthentication_token, phone_change, phone_change_token)
-values ('00000000-0000-0000-0000-000000000000', md5('u-yujin')::uuid, 'authenticated', 'authenticated', 'yujin@netogether.dev',
-  extensions.crypt('netogether1234', extensions.gen_salt('bf')), now(),
+values ('00000000-0000-0000-0000-000000000000', md5('u-yujin')::uuid, 'authenticated', 'authenticated', 'yujin@netsmoa.dev',
+  extensions.crypt('netsmoa1234', extensions.gen_salt('bf')), now(),
   '{"provider":"email","providers":["email"]}', '{"nickname":"유진"}', now(), now(),
   '', '', '', '', '', '', '', '');
 insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
 values (gen_random_uuid(), md5('u-yujin')::uuid, md5('u-yujin')::uuid::text,
-  jsonb_build_object('sub', md5('u-yujin')::uuid::text, 'email', 'yujin@netogether.dev', 'email_verified', true), 'email', now(), now(), now());
+  jsonb_build_object('sub', md5('u-yujin')::uuid::text, 'email', 'yujin@netsmoa.dev', 'email_verified', true), 'email', now(), now(), now());
 update public.profiles set nickname = '유진', bio = '컴퓨터학부 2학년 · 프론트엔드', skills = array['React','JavaScript','Figma']::text[],
   roles = array['FRONTEND']::text[], student_id = '2025012345' where id = md5('u-yujin')::uuid;
 
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
   raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
   confirmation_token, recovery_token, email_change_token_new, email_change, email_change_token_current, reauthentication_token, phone_change, phone_change_token)
-values ('00000000-0000-0000-0000-000000000000', md5('u-seojun')::uuid, 'authenticated', 'authenticated', 'seojun@netogether.dev',
-  extensions.crypt('netogether1234', extensions.gen_salt('bf')), now(),
+values ('00000000-0000-0000-0000-000000000000', md5('u-seojun')::uuid, 'authenticated', 'authenticated', 'seojun@netsmoa.dev',
+  extensions.crypt('netsmoa1234', extensions.gen_salt('bf')), now(),
   '{"provider":"email","providers":["email"]}', '{"nickname":"박서준"}', now(), now(),
   '', '', '', '', '', '', '', '');
 insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
 values (gen_random_uuid(), md5('u-seojun')::uuid, md5('u-seojun')::uuid::text,
-  jsonb_build_object('sub', md5('u-seojun')::uuid::text, 'email', 'seojun@netogether.dev', 'email_verified', true), 'email', now(), now(), now());
+  jsonb_build_object('sub', md5('u-seojun')::uuid::text, 'email', 'seojun@netsmoa.dev', 'email_verified', true), 'email', now(), now(), now());
 update public.profiles set nickname = '박서준', bio = '', skills = array['React','TypeScript']::text[],
   roles = array[]::text[], student_id = '' where id = md5('u-seojun')::uuid;
 
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
   raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
   confirmation_token, recovery_token, email_change_token_new, email_change, email_change_token_current, reauthentication_token, phone_change, phone_change_token)
-values ('00000000-0000-0000-0000-000000000000', md5('u-doyun')::uuid, 'authenticated', 'authenticated', 'doyun@netogether.dev',
-  extensions.crypt('netogether1234', extensions.gen_salt('bf')), now(),
+values ('00000000-0000-0000-0000-000000000000', md5('u-doyun')::uuid, 'authenticated', 'authenticated', 'doyun@netsmoa.dev',
+  extensions.crypt('netsmoa1234', extensions.gen_salt('bf')), now(),
   '{"provider":"email","providers":["email"]}', '{"nickname":"이도윤"}', now(), now(),
   '', '', '', '', '', '', '', '');
 insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
 values (gen_random_uuid(), md5('u-doyun')::uuid, md5('u-doyun')::uuid::text,
-  jsonb_build_object('sub', md5('u-doyun')::uuid::text, 'email', 'doyun@netogether.dev', 'email_verified', true), 'email', now(), now(), now());
+  jsonb_build_object('sub', md5('u-doyun')::uuid::text, 'email', 'doyun@netsmoa.dev', 'email_verified', true), 'email', now(), now(), now());
 update public.profiles set nickname = '이도윤', bio = '', skills = array['Java','Spring Boot']::text[],
   roles = array[]::text[], student_id = '' where id = md5('u-doyun')::uuid;
 
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
   raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
   confirmation_token, recovery_token, email_change_token_new, email_change, email_change_token_current, reauthentication_token, phone_change, phone_change_token)
-values ('00000000-0000-0000-0000-000000000000', md5('u-harin')::uuid, 'authenticated', 'authenticated', 'harin@netogether.dev',
-  extensions.crypt('netogether1234', extensions.gen_salt('bf')), now(),
+values ('00000000-0000-0000-0000-000000000000', md5('u-harin')::uuid, 'authenticated', 'authenticated', 'harin@netsmoa.dev',
+  extensions.crypt('netsmoa1234', extensions.gen_salt('bf')), now(),
   '{"provider":"email","providers":["email"]}', '{"nickname":"최하린"}', now(), now(),
   '', '', '', '', '', '', '', '');
 insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
 values (gen_random_uuid(), md5('u-harin')::uuid, md5('u-harin')::uuid::text,
-  jsonb_build_object('sub', md5('u-harin')::uuid::text, 'email', 'harin@netogether.dev', 'email_verified', true), 'email', now(), now(), now());
+  jsonb_build_object('sub', md5('u-harin')::uuid::text, 'email', 'harin@netsmoa.dev', 'email_verified', true), 'email', now(), now(), now());
 update public.profiles set nickname = '최하린', bio = '', skills = array['React','CSS']::text[],
   roles = array[]::text[], student_id = '' where id = md5('u-harin')::uuid;
 
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
   raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
   confirmation_token, recovery_token, email_change_token_new, email_change, email_change_token_current, reauthentication_token, phone_change, phone_change_token)
-values ('00000000-0000-0000-0000-000000000000', md5('u-minjae')::uuid, 'authenticated', 'authenticated', 'minjae@netogether.dev',
-  extensions.crypt('netogether1234', extensions.gen_salt('bf')), now(),
+values ('00000000-0000-0000-0000-000000000000', md5('u-minjae')::uuid, 'authenticated', 'authenticated', 'minjae@netsmoa.dev',
+  extensions.crypt('netsmoa1234', extensions.gen_salt('bf')), now(),
   '{"provider":"email","providers":["email"]}', '{"nickname":"정민재"}', now(), now(),
   '', '', '', '', '', '', '', '');
 insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
 values (gen_random_uuid(), md5('u-minjae')::uuid, md5('u-minjae')::uuid::text,
-  jsonb_build_object('sub', md5('u-minjae')::uuid::text, 'email', 'minjae@netogether.dev', 'email_verified', true), 'email', now(), now(), now());
+  jsonb_build_object('sub', md5('u-minjae')::uuid::text, 'email', 'minjae@netsmoa.dev', 'email_verified', true), 'email', now(), now(), now());
 update public.profiles set nickname = '정민재', bio = '', skills = array['Java','Spring Boot']::text[],
   roles = array[]::text[], student_id = '' where id = md5('u-minjae')::uuid;
 
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
   raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
   confirmation_token, recovery_token, email_change_token_new, email_change, email_change_token_current, reauthentication_token, phone_change, phone_change_token)
-values ('00000000-0000-0000-0000-000000000000', md5('u-jiwoo')::uuid, 'authenticated', 'authenticated', 'jiwoo@netogether.dev',
-  extensions.crypt('netogether1234', extensions.gen_salt('bf')), now(),
+values ('00000000-0000-0000-0000-000000000000', md5('u-jiwoo')::uuid, 'authenticated', 'authenticated', 'jiwoo@netsmoa.dev',
+  extensions.crypt('netsmoa1234', extensions.gen_salt('bf')), now(),
   '{"provider":"email","providers":["email"]}', '{"nickname":"한지우"}', now(), now(),
   '', '', '', '', '', '', '', '');
 insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
 values (gen_random_uuid(), md5('u-jiwoo')::uuid, md5('u-jiwoo')::uuid::text,
-  jsonb_build_object('sub', md5('u-jiwoo')::uuid::text, 'email', 'jiwoo@netogether.dev', 'email_verified', true), 'email', now(), now(), now());
+  jsonb_build_object('sub', md5('u-jiwoo')::uuid::text, 'email', 'jiwoo@netsmoa.dev', 'email_verified', true), 'email', now(), now(), now());
 update public.profiles set nickname = '한지우', bio = '', skills = array['MySQL']::text[],
   roles = array[]::text[], student_id = '' where id = md5('u-jiwoo')::uuid;
 
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
   raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
   confirmation_token, recovery_token, email_change_token_new, email_change, email_change_token_current, reauthentication_token, phone_change, phone_change_token)
-values ('00000000-0000-0000-0000-000000000000', md5('u-taeo')::uuid, 'authenticated', 'authenticated', 'taeo@netogether.dev',
-  extensions.crypt('netogether1234', extensions.gen_salt('bf')), now(),
+values ('00000000-0000-0000-0000-000000000000', md5('u-taeo')::uuid, 'authenticated', 'authenticated', 'taeo@netsmoa.dev',
+  extensions.crypt('netsmoa1234', extensions.gen_salt('bf')), now(),
   '{"provider":"email","providers":["email"]}', '{"nickname":"김태오"}', now(), now(),
   '', '', '', '', '', '', '', '');
 insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
 values (gen_random_uuid(), md5('u-taeo')::uuid, md5('u-taeo')::uuid::text,
-  jsonb_build_object('sub', md5('u-taeo')::uuid::text, 'email', 'taeo@netogether.dev', 'email_verified', true), 'email', now(), now(), now());
+  jsonb_build_object('sub', md5('u-taeo')::uuid::text, 'email', 'taeo@netsmoa.dev', 'email_verified', true), 'email', now(), now(), now());
 update public.profiles set nickname = '김태오', bio = '', skills = array['C++']::text[],
   roles = array[]::text[], student_id = '' where id = md5('u-taeo')::uuid;
 
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
   raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
   confirmation_token, recovery_token, email_change_token_new, email_change, email_change_token_current, reauthentication_token, phone_change, phone_change_token)
-values ('00000000-0000-0000-0000-000000000000', md5('u-seoa')::uuid, 'authenticated', 'authenticated', 'seoa@netogether.dev',
-  extensions.crypt('netogether1234', extensions.gen_salt('bf')), now(),
+values ('00000000-0000-0000-0000-000000000000', md5('u-seoa')::uuid, 'authenticated', 'authenticated', 'seoa@netsmoa.dev',
+  extensions.crypt('netsmoa1234', extensions.gen_salt('bf')), now(),
   '{"provider":"email","providers":["email"]}', '{"nickname":"윤서아"}', now(), now(),
   '', '', '', '', '', '', '', '');
 insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
 values (gen_random_uuid(), md5('u-seoa')::uuid, md5('u-seoa')::uuid::text,
-  jsonb_build_object('sub', md5('u-seoa')::uuid::text, 'email', 'seoa@netogether.dev', 'email_verified', true), 'email', now(), now(), now());
+  jsonb_build_object('sub', md5('u-seoa')::uuid::text, 'email', 'seoa@netsmoa.dev', 'email_verified', true), 'email', now(), now(), now());
 update public.profiles set nickname = '윤서아', bio = '', skills = array['Python']::text[],
   roles = array[]::text[], student_id = '' where id = md5('u-seoa')::uuid;
 
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
   raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
   confirmation_token, recovery_token, email_change_token_new, email_change, email_change_token_current, reauthentication_token, phone_change, phone_change_token)
-values ('00000000-0000-0000-0000-000000000000', md5('u-jimin')::uuid, 'authenticated', 'authenticated', 'jimin@netogether.dev',
-  extensions.crypt('netogether1234', extensions.gen_salt('bf')), now(),
+values ('00000000-0000-0000-0000-000000000000', md5('u-jimin')::uuid, 'authenticated', 'authenticated', 'jimin@netsmoa.dev',
+  extensions.crypt('netsmoa1234', extensions.gen_salt('bf')), now(),
   '{"provider":"email","providers":["email"]}', '{"nickname":"오지민"}', now(), now(),
   '', '', '', '', '', '', '', '');
 insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
 values (gen_random_uuid(), md5('u-jimin')::uuid, md5('u-jimin')::uuid::text,
-  jsonb_build_object('sub', md5('u-jimin')::uuid::text, 'email', 'jimin@netogether.dev', 'email_verified', true), 'email', now(), now(), now());
+  jsonb_build_object('sub', md5('u-jimin')::uuid::text, 'email', 'jimin@netsmoa.dev', 'email_verified', true), 'email', now(), now(), now());
 update public.profiles set nickname = '오지민', bio = '', skills = array['Node.js']::text[],
   roles = array[]::text[], student_id = '' where id = md5('u-jimin')::uuid;
 
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
   raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
   confirmation_token, recovery_token, email_change_token_new, email_change, email_change_token_current, reauthentication_token, phone_change, phone_change_token)
-values ('00000000-0000-0000-0000-000000000000', md5('u-yuna')::uuid, 'authenticated', 'authenticated', 'yuna@netogether.dev',
-  extensions.crypt('netogether1234', extensions.gen_salt('bf')), now(),
+values ('00000000-0000-0000-0000-000000000000', md5('u-yuna')::uuid, 'authenticated', 'authenticated', 'yuna@netsmoa.dev',
+  extensions.crypt('netsmoa1234', extensions.gen_salt('bf')), now(),
   '{"provider":"email","providers":["email"]}', '{"nickname":"서유나"}', now(), now(),
   '', '', '', '', '', '', '', '');
 insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
 values (gen_random_uuid(), md5('u-yuna')::uuid, md5('u-yuna')::uuid::text,
-  jsonb_build_object('sub', md5('u-yuna')::uuid::text, 'email', 'yuna@netogether.dev', 'email_verified', true), 'email', now(), now(), now());
+  jsonb_build_object('sub', md5('u-yuna')::uuid::text, 'email', 'yuna@netsmoa.dev', 'email_verified', true), 'email', now(), now(), now());
 update public.profiles set nickname = '서유나', bio = '', skills = array['Python']::text[],
   roles = array[]::text[], student_id = '' where id = md5('u-yuna')::uuid;
 
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
   raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
   confirmation_token, recovery_token, email_change_token_new, email_change, email_change_token_current, reauthentication_token, phone_change, phone_change_token)
-values ('00000000-0000-0000-0000-000000000000', md5('u-hyunwoo')::uuid, 'authenticated', 'authenticated', 'hyunwoo@netogether.dev',
-  extensions.crypt('netogether1234', extensions.gen_salt('bf')), now(),
+values ('00000000-0000-0000-0000-000000000000', md5('u-hyunwoo')::uuid, 'authenticated', 'authenticated', 'hyunwoo@netsmoa.dev',
+  extensions.crypt('netsmoa1234', extensions.gen_salt('bf')), now(),
   '{"provider":"email","providers":["email"]}', '{"nickname":"강현우"}', now(), now(),
   '', '', '', '', '', '', '', '');
 insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
 values (gen_random_uuid(), md5('u-hyunwoo')::uuid, md5('u-hyunwoo')::uuid::text,
-  jsonb_build_object('sub', md5('u-hyunwoo')::uuid::text, 'email', 'hyunwoo@netogether.dev', 'email_verified', true), 'email', now(), now(), now());
+  jsonb_build_object('sub', md5('u-hyunwoo')::uuid::text, 'email', 'hyunwoo@netsmoa.dev', 'email_verified', true), 'email', now(), now(), now());
 update public.profiles set nickname = '강현우', bio = '', skills = array['React']::text[],
   roles = array[]::text[], student_id = '' where id = md5('u-hyunwoo')::uuid;
 
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
   raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
   confirmation_token, recovery_token, email_change_token_new, email_change, email_change_token_current, reauthentication_token, phone_change, phone_change_token)
-values ('00000000-0000-0000-0000-000000000000', md5('u-hajun')::uuid, 'authenticated', 'authenticated', 'hajun@netogether.dev',
-  extensions.crypt('netogether1234', extensions.gen_salt('bf')), now(),
+values ('00000000-0000-0000-0000-000000000000', md5('u-hajun')::uuid, 'authenticated', 'authenticated', 'hajun@netsmoa.dev',
+  extensions.crypt('netsmoa1234', extensions.gen_salt('bf')), now(),
   '{"provider":"email","providers":["email"]}', '{"nickname":"임하준"}', now(), now(),
   '', '', '', '', '', '', '', '');
 insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
 values (gen_random_uuid(), md5('u-hajun')::uuid, md5('u-hajun')::uuid::text,
-  jsonb_build_object('sub', md5('u-hajun')::uuid::text, 'email', 'hajun@netogether.dev', 'email_verified', true), 'email', now(), now(), now());
+  jsonb_build_object('sub', md5('u-hajun')::uuid::text, 'email', 'hajun@netsmoa.dev', 'email_verified', true), 'email', now(), now(), now());
 update public.profiles set nickname = '임하준', bio = '', skills = array[]::text[],
   roles = array[]::text[], student_id = '' where id = md5('u-hajun')::uuid;
 
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
   raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
   confirmation_token, recovery_token, email_change_token_new, email_change, email_change_token_current, reauthentication_token, phone_change, phone_change_token)
-values ('00000000-0000-0000-0000-000000000000', md5('u-chaewon')::uuid, 'authenticated', 'authenticated', 'chaewon@netogether.dev',
-  extensions.crypt('netogether1234', extensions.gen_salt('bf')), now(),
+values ('00000000-0000-0000-0000-000000000000', md5('u-chaewon')::uuid, 'authenticated', 'authenticated', 'chaewon@netsmoa.dev',
+  extensions.crypt('netsmoa1234', extensions.gen_salt('bf')), now(),
   '{"provider":"email","providers":["email"]}', '{"nickname":"문채원"}', now(), now(),
   '', '', '', '', '', '', '', '');
 insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
 values (gen_random_uuid(), md5('u-chaewon')::uuid, md5('u-chaewon')::uuid::text,
-  jsonb_build_object('sub', md5('u-chaewon')::uuid::text, 'email', 'chaewon@netogether.dev', 'email_verified', true), 'email', now(), now(), now());
+  jsonb_build_object('sub', md5('u-chaewon')::uuid::text, 'email', 'chaewon@netsmoa.dev', 'email_verified', true), 'email', now(), now(), now());
 update public.profiles set nickname = '문채원', bio = '', skills = array[]::text[],
   roles = array[]::text[], student_id = '' where id = md5('u-chaewon')::uuid;
 
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
   raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
   confirmation_token, recovery_token, email_change_token_new, email_change, email_change_token_current, reauthentication_token, phone_change, phone_change_token)
-values ('00000000-0000-0000-0000-000000000000', md5('u-junseo')::uuid, 'authenticated', 'authenticated', 'junseo@netogether.dev',
-  extensions.crypt('netogether1234', extensions.gen_salt('bf')), now(),
+values ('00000000-0000-0000-0000-000000000000', md5('u-junseo')::uuid, 'authenticated', 'authenticated', 'junseo@netsmoa.dev',
+  extensions.crypt('netsmoa1234', extensions.gen_salt('bf')), now(),
   '{"provider":"email","providers":["email"]}', '{"nickname":"배준서"}', now(), now(),
   '', '', '', '', '', '', '', '');
 insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
 values (gen_random_uuid(), md5('u-junseo')::uuid, md5('u-junseo')::uuid::text,
-  jsonb_build_object('sub', md5('u-junseo')::uuid::text, 'email', 'junseo@netogether.dev', 'email_verified', true), 'email', now(), now(), now());
+  jsonb_build_object('sub', md5('u-junseo')::uuid::text, 'email', 'junseo@netsmoa.dev', 'email_verified', true), 'email', now(), now(), now());
 update public.profiles set nickname = '배준서', bio = '', skills = array[]::text[],
   roles = array[]::text[], student_id = '' where id = md5('u-junseo')::uuid;
 
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
   raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
   confirmation_token, recovery_token, email_change_token_new, email_change, email_change_token_current, reauthentication_token, phone_change, phone_change_token)
-values ('00000000-0000-0000-0000-000000000000', md5('u-eunbi')::uuid, 'authenticated', 'authenticated', 'eunbi@netogether.dev',
-  extensions.crypt('netogether1234', extensions.gen_salt('bf')), now(),
+values ('00000000-0000-0000-0000-000000000000', md5('u-eunbi')::uuid, 'authenticated', 'authenticated', 'eunbi@netsmoa.dev',
+  extensions.crypt('netsmoa1234', extensions.gen_salt('bf')), now(),
   '{"provider":"email","providers":["email"]}', '{"nickname":"노은비"}', now(), now(),
   '', '', '', '', '', '', '', '');
 insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
 values (gen_random_uuid(), md5('u-eunbi')::uuid, md5('u-eunbi')::uuid::text,
-  jsonb_build_object('sub', md5('u-eunbi')::uuid::text, 'email', 'eunbi@netogether.dev', 'email_verified', true), 'email', now(), now(), now());
+  jsonb_build_object('sub', md5('u-eunbi')::uuid::text, 'email', 'eunbi@netsmoa.dev', 'email_verified', true), 'email', now(), now(), now());
 update public.profiles set nickname = '노은비', bio = '', skills = array['Next.js']::text[],
   roles = array[]::text[], student_id = '' where id = md5('u-eunbi')::uuid;
 
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
   raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
   confirmation_token, recovery_token, email_change_token_new, email_change, email_change_token_current, reauthentication_token, phone_change, phone_change_token)
-values ('00000000-0000-0000-0000-000000000000', md5('u-daeun')::uuid, 'authenticated', 'authenticated', 'daeun@netogether.dev',
-  extensions.crypt('netogether1234', extensions.gen_salt('bf')), now(),
+values ('00000000-0000-0000-0000-000000000000', md5('u-daeun')::uuid, 'authenticated', 'authenticated', 'daeun@netsmoa.dev',
+  extensions.crypt('netsmoa1234', extensions.gen_salt('bf')), now(),
   '{"provider":"email","providers":["email"]}', '{"nickname":"정다은"}', now(), now(),
   '', '', '', '', '', '', '', '');
 insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
 values (gen_random_uuid(), md5('u-daeun')::uuid, md5('u-daeun')::uuid::text,
-  jsonb_build_object('sub', md5('u-daeun')::uuid::text, 'email', 'daeun@netogether.dev', 'email_verified', true), 'email', now(), now(), now());
+  jsonb_build_object('sub', md5('u-daeun')::uuid::text, 'email', 'daeun@netsmoa.dev', 'email_verified', true), 'email', now(), now(), now());
 update public.profiles set nickname = '정다은', bio = '', skills = array['CSS']::text[],
   roles = array[]::text[], student_id = '' where id = md5('u-daeun')::uuid;
 
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
   raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
   confirmation_token, recovery_token, email_change_token_new, email_change, email_change_token_current, reauthentication_token, phone_change, phone_change_token)
-values ('00000000-0000-0000-0000-000000000000', md5('u-minho')::uuid, 'authenticated', 'authenticated', 'minho@netogether.dev',
-  extensions.crypt('netogether1234', extensions.gen_salt('bf')), now(),
+values ('00000000-0000-0000-0000-000000000000', md5('u-minho')::uuid, 'authenticated', 'authenticated', 'minho@netsmoa.dev',
+  extensions.crypt('netsmoa1234', extensions.gen_salt('bf')), now(),
   '{"provider":"email","providers":["email"]}', '{"nickname":"황민호"}', now(), now(),
   '', '', '', '', '', '', '', '');
 insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
 values (gen_random_uuid(), md5('u-minho')::uuid, md5('u-minho')::uuid::text,
-  jsonb_build_object('sub', md5('u-minho')::uuid::text, 'email', 'minho@netogether.dev', 'email_verified', true), 'email', now(), now(), now());
+  jsonb_build_object('sub', md5('u-minho')::uuid::text, 'email', 'minho@netsmoa.dev', 'email_verified', true), 'email', now(), now(), now());
 update public.profiles set nickname = '황민호', bio = '', skills = array['SQL']::text[],
   roles = array[]::text[], student_id = '' where id = md5('u-minho')::uuid;
 
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
   raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
   confirmation_token, recovery_token, email_change_token_new, email_change, email_change_token_current, reauthentication_token, phone_change, phone_change_token)
-values ('00000000-0000-0000-0000-000000000000', md5('u-yerin')::uuid, 'authenticated', 'authenticated', 'yerin@netogether.dev',
-  extensions.crypt('netogether1234', extensions.gen_salt('bf')), now(),
+values ('00000000-0000-0000-0000-000000000000', md5('u-yerin')::uuid, 'authenticated', 'authenticated', 'yerin@netsmoa.dev',
+  extensions.crypt('netsmoa1234', extensions.gen_salt('bf')), now(),
   '{"provider":"email","providers":["email"]}', '{"nickname":"조예린"}', now(), now(),
   '', '', '', '', '', '', '', '');
 insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
 values (gen_random_uuid(), md5('u-yerin')::uuid, md5('u-yerin')::uuid::text,
-  jsonb_build_object('sub', md5('u-yerin')::uuid::text, 'email', 'yerin@netogether.dev', 'email_verified', true), 'email', now(), now(), now());
+  jsonb_build_object('sub', md5('u-yerin')::uuid::text, 'email', 'yerin@netsmoa.dev', 'email_verified', true), 'email', now(), now(), now());
 update public.profiles set nickname = '조예린', bio = '', skills = array['SQL']::text[],
   roles = array[]::text[], student_id = '' where id = md5('u-yerin')::uuid;
 
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
   raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
   confirmation_token, recovery_token, email_change_token_new, email_change, email_change_token_current, reauthentication_token, phone_change, phone_change_token)
-values ('00000000-0000-0000-0000-000000000000', md5('u-taemin')::uuid, 'authenticated', 'authenticated', 'taemin@netogether.dev',
-  extensions.crypt('netogether1234', extensions.gen_salt('bf')), now(),
+values ('00000000-0000-0000-0000-000000000000', md5('u-taemin')::uuid, 'authenticated', 'authenticated', 'taemin@netsmoa.dev',
+  extensions.crypt('netsmoa1234', extensions.gen_salt('bf')), now(),
   '{"provider":"email","providers":["email"]}', '{"nickname":"권태민"}', now(), now(),
   '', '', '', '', '', '', '', '');
 insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
 values (gen_random_uuid(), md5('u-taemin')::uuid, md5('u-taemin')::uuid::text,
-  jsonb_build_object('sub', md5('u-taemin')::uuid::text, 'email', 'taemin@netogether.dev', 'email_verified', true), 'email', now(), now(), now());
+  jsonb_build_object('sub', md5('u-taemin')::uuid::text, 'email', 'taemin@netsmoa.dev', 'email_verified', true), 'email', now(), now(), now());
 update public.profiles set nickname = '권태민', bio = '', skills = array['Unity']::text[],
   roles = array[]::text[], student_id = '' where id = md5('u-taemin')::uuid;
 
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
   raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
   confirmation_token, recovery_token, email_change_token_new, email_change, email_change_token_current, reauthentication_token, phone_change, phone_change_token)
-values ('00000000-0000-0000-0000-000000000000', md5('u-jiho')::uuid, 'authenticated', 'authenticated', 'jiho@netogether.dev',
-  extensions.crypt('netogether1234', extensions.gen_salt('bf')), now(),
+values ('00000000-0000-0000-0000-000000000000', md5('u-jiho')::uuid, 'authenticated', 'authenticated', 'jiho@netsmoa.dev',
+  extensions.crypt('netsmoa1234', extensions.gen_salt('bf')), now(),
   '{"provider":"email","providers":["email"]}', '{"nickname":"신지호"}', now(), now(),
   '', '', '', '', '', '', '', '');
 insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
 values (gen_random_uuid(), md5('u-jiho')::uuid, md5('u-jiho')::uuid::text,
-  jsonb_build_object('sub', md5('u-jiho')::uuid::text, 'email', 'jiho@netogether.dev', 'email_verified', true), 'email', now(), now(), now());
+  jsonb_build_object('sub', md5('u-jiho')::uuid::text, 'email', 'jiho@netsmoa.dev', 'email_verified', true), 'email', now(), now(), now());
 update public.profiles set nickname = '신지호', bio = '', skills = array['Python']::text[],
   roles = array[]::text[], student_id = '' where id = md5('u-jiho')::uuid;
 
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
   raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
   confirmation_token, recovery_token, email_change_token_new, email_change, email_change_token_current, reauthentication_token, phone_change, phone_change_token)
-values ('00000000-0000-0000-0000-000000000000', md5('u-haneul')::uuid, 'authenticated', 'authenticated', 'haneul@netogether.dev',
-  extensions.crypt('netogether1234', extensions.gen_salt('bf')), now(),
+values ('00000000-0000-0000-0000-000000000000', md5('u-haneul')::uuid, 'authenticated', 'authenticated', 'haneul@netsmoa.dev',
+  extensions.crypt('netsmoa1234', extensions.gen_salt('bf')), now(),
   '{"provider":"email","providers":["email"]}', '{"nickname":"유하늘"}', now(), now(),
   '', '', '', '', '', '', '', '');
 insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
 values (gen_random_uuid(), md5('u-haneul')::uuid, md5('u-haneul')::uuid::text,
-  jsonb_build_object('sub', md5('u-haneul')::uuid::text, 'email', 'haneul@netogether.dev', 'email_verified', true), 'email', now(), now(), now());
+  jsonb_build_object('sub', md5('u-haneul')::uuid::text, 'email', 'haneul@netsmoa.dev', 'email_verified', true), 'email', now(), now(), now());
 update public.profiles set nickname = '유하늘', bio = '', skills = array['React']::text[],
   roles = array[]::text[], student_id = '' where id = md5('u-haneul')::uuid;
 
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
   raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
   confirmation_token, recovery_token, email_change_token_new, email_change, email_change_token_current, reauthentication_token, phone_change, phone_change_token)
-values ('00000000-0000-0000-0000-000000000000', md5('u-soyul')::uuid, 'authenticated', 'authenticated', 'soyul@netogether.dev',
-  extensions.crypt('netogether1234', extensions.gen_salt('bf')), now(),
+values ('00000000-0000-0000-0000-000000000000', md5('u-soyul')::uuid, 'authenticated', 'authenticated', 'soyul@netsmoa.dev',
+  extensions.crypt('netsmoa1234', extensions.gen_salt('bf')), now(),
   '{"provider":"email","providers":["email"]}', '{"nickname":"장소율"}', now(), now(),
   '', '', '', '', '', '', '', '');
 insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
 values (gen_random_uuid(), md5('u-soyul')::uuid, md5('u-soyul')::uuid::text,
-  jsonb_build_object('sub', md5('u-soyul')::uuid::text, 'email', 'soyul@netogether.dev', 'email_verified', true), 'email', now(), now(), now());
+  jsonb_build_object('sub', md5('u-soyul')::uuid::text, 'email', 'soyul@netsmoa.dev', 'email_verified', true), 'email', now(), now(), now());
 update public.profiles set nickname = '장소율', bio = '', skills = array['JavaScript']::text[],
   roles = array[]::text[], student_id = '' where id = md5('u-soyul')::uuid;
 
 insert into auth.users (instance_id, id, aud, role, email, encrypted_password, email_confirmed_at,
   raw_app_meta_data, raw_user_meta_data, created_at, updated_at,
   confirmation_token, recovery_token, email_change_token_new, email_change, email_change_token_current, reauthentication_token, phone_change, phone_change_token)
-values ('00000000-0000-0000-0000-000000000000', md5('u-hyun')::uuid, 'authenticated', 'authenticated', 'hyun@netogether.dev',
-  extensions.crypt('netogether1234', extensions.gen_salt('bf')), now(),
+values ('00000000-0000-0000-0000-000000000000', md5('u-hyun')::uuid, 'authenticated', 'authenticated', 'hyun@netsmoa.dev',
+  extensions.crypt('netsmoa1234', extensions.gen_salt('bf')), now(),
   '{"provider":"email","providers":["email"]}', '{"nickname":"남궁현"}', now(), now(),
   '', '', '', '', '', '', '', '');
 insert into auth.identities (id, user_id, provider_id, identity_data, provider, last_sign_in_at, created_at, updated_at)
 values (gen_random_uuid(), md5('u-hyun')::uuid, md5('u-hyun')::uuid::text,
-  jsonb_build_object('sub', md5('u-hyun')::uuid::text, 'email', 'hyun@netogether.dev', 'email_verified', true), 'email', now(), now(), now());
+  jsonb_build_object('sub', md5('u-hyun')::uuid::text, 'email', 'hyun@netsmoa.dev', 'email_verified', true), 'email', now(), now(), now());
 update public.profiles set nickname = '남궁현', bio = '', skills = array['Python']::text[],
   roles = array[]::text[], student_id = '' where id = md5('u-hyun')::uuid;
 
@@ -397,4 +397,4 @@ insert into public.messages (id, application_id, sender_id, body, created_at) va
 commit;
 
 -- 초기화(데모 데이터 전부 지우기):
--- delete from auth.users where email like '%@netogether.dev';
+-- delete from auth.users where email like '%@netsmoa.dev';

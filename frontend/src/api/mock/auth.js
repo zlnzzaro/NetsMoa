@@ -32,6 +32,7 @@ const demoOnly = async () => {
 export const signIn = demoOnly
 export const signUp = demoOnly
 export const signOut = demoOnly
+export const resendSignup = demoOnly
 export const isNicknameAvailable = async () => true
 export const onAuthChange = () => () => {}
 export const hasSession = async () => true
