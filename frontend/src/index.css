@@ -293,6 +293,7 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
 .skill-box{height:34px;min-width:72px;padding:0 12px;border:0;border-radius:3px;background:var(--white);outline:1px solid var(--rule);outline-offset:-1px;color:var(--ink);font:inherit;font-size:13px;cursor:pointer;white-space:nowrap}
 .skill-box:hover{background:var(--pale)}
 .skill-box.on{background:var(--ink);outline-color:var(--ink);color:var(--canvas)}
+.skill-box:disabled{color:var(--dim);background:var(--white);cursor:not-allowed}
 /* 테두리를 outline 으로 그려서, 키보드 초점 표시를 다시 넣어 줘요 */
 .skill-box:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .skill-add{display:flex;gap:6px;border-top:1px solid var(--rule-a);padding-top:12px}
