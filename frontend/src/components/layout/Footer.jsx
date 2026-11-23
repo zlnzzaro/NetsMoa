@@ -1,5 +1,5 @@
 // 모든 화면 맨 아래의 숯색 마무리 영역.
-// 6칸 링크 + 크고 흐린 NETogether 글자 + 작은 안내 문구.
+// 6칸 링크 + 저작권 한 줄.
 import { Link } from 'react-router-dom'
 import Icon from '../common/Icon'
 import { pad2 } from '../../utils/post'
@@ -29,14 +29,7 @@ export default function Footer() {
           ))}
         </div>
 
-        <svg className="wordmark" viewBox="0 0 1098 236" aria-hidden="true">
-          <text x="549" y="200" textAnchor="middle" fontFamily="GmarketSans, sans-serif" fontWeight="700"
-            fontSize="212" letterSpacing="-12" textLength="1090" lengthAdjust="spacingAndGlyphs"
-            fill="rgba(255,255,255,.09)">NETogether</text>
-        </svg>
-
         <div className="disclose">
-          <span>아직 시연용 데이터예요. 새로고침하면 처음 상태로 돌아가요.</span>
           <span>© 2026 NETogether</span>
         </div>
       </div>

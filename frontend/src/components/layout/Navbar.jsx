@@ -8,7 +8,8 @@ export default function Navbar() {
   const cls = ({ isActive }) => (isActive ? 'nl on' : 'nl')
   return (
     <header className="navwrap">
-      <div className="frame">
+      {/* nav-frame: 노트북 이상에서는 화면 전체 폭 (좌우 여백 --edge) */}
+      <div className="frame nav-frame">
         <nav className="top">
           <Link className="logo" to="/"><span className="mk" />NETogether</Link>
           <NavLink className={cls} to="/" end>팀원 찾기</NavLink>

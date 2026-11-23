@@ -25,6 +25,7 @@
    굵기는 300(상단바), 700(홈 메인 문구·h1~h3), 500(나머지)만 써요. */
 /* Layout: 1098px 본문 틀. 따뜻한 흰 바탕 위에 색은 '흐릿한 질감 + 선명한 화면 조각'에만. 지표는 1px 세로선 + 작은 번호. 끝은 숯색 목적지. */
 :root{
+  --nav-h:88px; /* 상단바 높이: 이 숫자 하나만 바꾸면 돼요 */
   --ink:#1a1a1a; --nav:#444444; --muted:#5f5f5f; --dim:#b4b4b0;
   --rule:#e3e3e2; --rule-a:rgba(38,38,35,.1); --dark-rule:rgba(243,243,245,.16);
   --pale:#f0f0ee; --canvas:#f8f8f7; --white:#ffffff;
@@ -67,9 +68,9 @@ svg.i{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.4;stro
 .pair{display:flex;gap:5.4px;flex-wrap:wrap}
 
 /* 상단바 (굵기 300) */
-.navwrap{position:fixed;top:0;left:0;right:0;z-index:30;height:calc(64px + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px)}
+.navwrap{position:fixed;top:0;left:0;right:0;z-index:30;height:calc(var(--nav-h) + env(safe-area-inset-top,0px));padding-top:env(safe-area-inset-top,0px)}
 .navwrap::before{content:"";position:absolute;inset:0 0 -40px 0;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);background:rgba(248,248,247,.6);-webkit-mask:linear-gradient(#000 55%,transparent);mask:linear-gradient(#000 55%,transparent);pointer-events:none}
-nav.top{position:relative;height:64px;display:flex;align-items:center;gap:22px;font-weight:300;font-size:13.5px;color:var(--nav)}
+nav.top{position:relative;height:var(--nav-h);display:flex;align-items:center;gap:22px;font-weight:300;font-size:13.5px;color:var(--nav)}
 nav.top *{font-weight:300}
 .logo{display:flex;align-items:center;gap:8px;color:var(--ink);text-decoration:none;font-size:16px;letter-spacing:-.02em}
 .logo .mk{width:16px;height:16px;border-radius:3.6px;background:conic-gradient(from 200deg,var(--cyan),var(--violet),var(--rose),var(--green),var(--cyan))}
@@ -116,13 +117,15 @@ nav.top .btn{font-weight:300}
 .vg .pane .bub.me{background:var(--ink);color:var(--canvas);justify-self:end}
 .vg .pane .seat{width:22px;height:22px;border-radius:3px;background:var(--ink)}
 .vg .pane .seat.e{background:transparent;outline:1px dashed var(--muted);outline-offset:-1px}
-@keyframes wx{0%,100%{translate:0 0}50%{translate:10px 0}}
-@keyframes wy{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+/* 첫 화면 카드 움직임: 귀퉁이(원래 자리)에서 화면 가운데 쪽으로 --dx, --dy 만큼 다가갔다가 돌아와요.
+   방향·거리는 귀퉁이마다 아래 .float.tl/.tr/.bl/.br 에서 정해요. */
+@keyframes wx{0%,100%{translate:0 0}50%{translate:var(--dx,14px) 0}}
+@keyframes wy{0%,100%{transform:translateY(0)}50%{transform:translateY(var(--dy,-16px))}}
 .drift{animation:wx 12s cubic-bezier(.455,.03,.515,.955) infinite}
 .drift>.vg{animation:wy 16s cubic-bezier(.455,.03,.515,.955) infinite}
 
 /* 첫 화면: 가운데 글자 + 둘레의 화면 조각 */
-.hero{position:relative;min-height:max(720px,min(900px,100svh));overflow:hidden;display:grid;place-items:center;padding-top:64px}
+.hero{position:relative;min-height:max(720px,min(900px,100svh));overflow:hidden;display:grid;place-items:center;padding-top:var(--nav-h)}
 .hero .pocket{position:relative;z-index:2;max-width:522px;text-align:center;display:grid;gap:14.4px;justify-items:center;padding:0 16px}
 .hero .pocket p{font-size:13.5px;color:var(--muted);max-width:360px}
 .hero .pocket .pair{justify-content:center;margin-top:7px}
@@ -135,11 +138,63 @@ nav.top .btn{font-weight:300}
   .hero .float.hide-s{display:none}
   .hero .floats-s{display:flex;justify-content:center;gap:0;flex-wrap:wrap;margin-top:28px}
 }
+/* 노트북 이상(960px~): 상단바와 첫 화면을 화면 전체 폭으로. 좌우 여백은 둘 다 --edge 라서
+   왼쪽 카드 바깥 끝 = 로고 왼쪽 끝, 오른쪽 카드 바깥 끝 = 아바타 오른쪽 끝.
+   첫 화면 높이 = 화면 높이 - 상단바(--nav-h). 카드는 이 영역의 네 귀퉁이 기준 % 로 놓아요.
+   카드 크기는 화면 폭(21vw)과 높이(36svh) 중 작은 쪽을 따라 220~360px 사이에서 바뀌어요. */
+:root{--edge:clamp(24px,4vw,64px);--card:clamp(220px,min(21vw,36svh),360px)}
+@media (min-width:960px){
+  /* 상단바 글씨·버튼 키우기 (노트북 이상만, 폰은 그대로) */
+  nav.top{font-size:15px;gap:26px}
+  .logo{font-size:19px;gap:10px}
+  .logo .mk{width:19px;height:19px}
+  nav.top .wbtn{height:36px;padding:0 14px;font-size:14.5px}
+  #avatarBtn,#avatarBtn .av{width:40px;height:40px}
+  #avatarBtn .av{font-size:14px}
+  .menu{top:50px}
+  .nav-frame{max-width:none;padding-left:max(var(--edge),env(safe-area-inset-left,0px));padding-right:max(var(--edge),env(safe-area-inset-right,0px))}
+  .hero{height:calc(100svh - var(--nav-h) - env(safe-area-inset-top,0px));min-height:560px;margin-top:calc(var(--nav-h) + env(safe-area-inset-top,0px));padding:0 var(--edge)}
+  .hero .display{font-size:clamp(36px,3.8vw,64px)}
+  .hero .pocket p{font-size:clamp(13.5px,.95vw,16px);max-width:clamp(360px,26vw,440px)}
+  .hero .float .vg{width:var(--card)}
+  .hero .float.tl{left:var(--edge);top:3%}
+  .hero .float.tr{right:var(--edge);top:7%}
+  .hero .float.bl{left:var(--edge);bottom:6%}
+  .hero .float.br{right:var(--edge);bottom:2%}
+  /* 가운데 쪽으로 다가가는 거리: 좌우는 화면 폭의 6%, 위아래는 화면 높이의 7% (1280x800 에서 약 77px, 56px) */
+  .hero .float{--move-x:6vw;--move-y:7svh}
+  .hero .float.tl{--dx:var(--move-x);--dy:var(--move-y)}
+  .hero .float.tr{--dx:calc(-1 * var(--move-x));--dy:var(--move-y)}
+  .hero .float.bl{--dx:var(--move-x);--dy:calc(-1 * var(--move-y))}
+  .hero .float.br{--dx:calc(-1 * var(--move-x));--dy:calc(-1 * var(--move-y))}
+}
 
 /* 조용한 설명 문단 */
 .quiet{min-height:300px;display:grid;place-items:center;padding-block:60px}
 .quiet p{max-width:549px;color:var(--muted)}
 .quiet p b{color:var(--ink)}
+
+/* 기능 소개 (홈, 스크롤하면 나타남): 한쪽 제목·설명·버튼, 반대쪽 화면 예시. .flip 이면 좌우 바꿈 */
+.feat{min-height:75svh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,5vw,80px);align-items:center;padding-block:40px}
+.feat-text{display:grid;gap:16px;justify-items:start;max-width:460px;justify-self:center}
+.feat-text h2{font-size:clamp(28px,3vw,44px);line-height:1.2;letter-spacing:-.03em}
+.feat-text p{font-size:clamp(14px,1.1vw,16px);line-height:1.6;color:var(--muted)}
+.feat-text .btn{margin-top:8px}
+.feat-ex{justify-self:center}
+.feat-ex .vg{width:clamp(300px,30vw,420px)}
+.feat.flip .feat-text{order:2}
+@media (max-width:900px){
+  .feat{min-height:auto;grid-template-columns:minmax(0,1fr);gap:28px;padding-block:56px}
+  .feat.flip .feat-text{order:0}
+  .feat-text{justify-self:start}
+  .feat-ex .vg{width:min(340px,100%)}
+}
+/* 등장 애니메이션: 아래에서 24px 올라오며 나타남. --i 순서대로 0.1초씩 늦게.
+   "동작 줄이기" 설정이면 이 규칙이 아예 안 걸려서 처음부터 그대로 보여요. */
+@media (prefers-reduced-motion:no-preference){
+  .feat .rv{opacity:0;translate:0 24px;transition:opacity .6s ease,translate .6s ease;transition-delay:calc(var(--i,0) * .1s)}
+  .feat.in .rv{opacity:1;translate:0 0}
+}
 
 /* 세로선 지표 */
 .ruled4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-right:1px solid var(--rule-a)}
@@ -219,10 +274,10 @@ nav.top .btn{font-weight:300}
 .fcol a:hover{text-decoration:underline}
 .fcol .idx{color:var(--dim);margin-top:auto;padding-top:40px}
 .wordmark{display:block;width:100%;height:auto;margin-top:clamp(80px,9vw,115px)}
-.disclose{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:48px 28px;font-size:12px;color:var(--dim)}
+.disclose{display:flex;justify-content:flex-end;gap:12px;flex-wrap:wrap;padding-block:48px 28px;font-size:12px;color:var(--dim)}
 
 /* 안쪽 화면 */
-.page{padding-top:calc(64px + env(safe-area-inset-top,0px) + 40px)}
+.page{padding-top:calc(var(--nav-h) + env(safe-area-inset-top,0px) + 40px)}
 .back{display:inline-flex;align-items:center;gap:4px;font-size:13px;color:var(--muted);text-decoration:none}
 .back:hover{color:var(--ink)}
 .intro{padding-block:48px 56px;display:grid;gap:14.4px;max-width:640px}
@@ -234,7 +289,7 @@ nav.top .btn{font-weight:300}
 .d-title{margin-top:14.4px}
 .d-desc{white-space:pre-line;margin-top:21.6px;max-width:549px;color:var(--muted)}
 .d-desc::first-line{color:var(--ink)}
-.side{position:sticky;top:calc(64px + 24px);display:grid;gap:21.6px}
+.side{position:sticky;top:calc(var(--nav-h) + 24px);display:grid;gap:21.6px}
 .sidepanel{position:relative;overflow:hidden;border-left:1px solid var(--rule-a);border-right:1px solid var(--rule-a);padding:0 8.1px;min-height:300px;display:flex;flex-direction:column;justify-content:space-between;gap:21.6px}
 .sidepanel>*{position:relative}
 .sidepanel .num{font-size:40px;letter-spacing:-.03em;line-height:1}
@@ -742,9 +797,9 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 
 
-/* 모집글 ?�세 - ??�� 목록 ?�자??개선 */
+/* 모집글 ?�세 - ??�� 목록 ?�자??개선 */
 
-/* ??�� 목록 ?�체 */
+/* ??�� 목록 ?�체 */
 .roles {
   margin-top: 64px;
 }
@@ -755,7 +810,7 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
   color: var(--muted);
 }
 
-/* ??�� ?�나�??�립??카드�??�시 */
+/* ??�� ?�나�??�립??카드�??�시 */
 .rrow2 {
   display: grid;
   grid-template-columns: 38px minmax(0, 1fr) auto;
@@ -778,20 +833,20 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
   margin-bottom: 0;
 }
 
-/* 마우?��? ?�렸????카드 강조 */
+/* 마우?��? ?�렸????카드 강조 */
 .rrow2:hover {
   border-color: var(--dim);
   box-shadow: 0 3px 12px rgba(38, 38, 35, 0.04);
 }
 
-/* ??�� 번호 */
+/* ??�� 번호 */
 .rrow2 > .idx {
   padding-top: 3px;
   color: var(--muted);
   font-size: 13px;
 }
 
-/* ??�� ?�목�??�원 */
+/* ??�� ?�목�??�원 */
 .role-head {
   display: flex;
   align-items: center;
@@ -806,7 +861,7 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
   letter-spacing: -0.025em;
 }
 
-/* 모집 ?�원 강조 */
+/* 모집 ?�원 강조 */
 .role-head .cap {
   padding: 4px 9px;
   border-radius: 4px;
@@ -815,18 +870,18 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
   font-size: 12px;
 }
 
-/* ??기술 ?�택 매칭 */
+/* ??기술 ?�택 매칭 */
 .role-head .tag.m {
   font-size: 11px;
 }
 
-/* ?�요 기술 */
+/* ?�요 기술 */
 .rrow2 .rs {
   margin-top: 10px;
   color: var(--muted);
 }
 
-/* ?�??�?빈자�?*/
+/* ?�??�?빈자�?*/
 .seats {
   display: flex;
   flex-wrap: wrap;
@@ -834,7 +889,7 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
   margin-top: 16px;
 }
 
-/* ?�재 참여 중인 ?�??*/
+/* ?�재 참여 중인 ?�??*/
 .seat {
   min-height: 34px;
   padding: 3px 11px 3px 5px;
@@ -844,7 +899,7 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
   font-size: 12.5px;
 }
 
-/* ?�직 모집 중인 빈자�?*/
+/* ?�직 모집 중인 빈자�?*/
 .seat.e {
   min-height: 34px;
   padding: 0 13px;
@@ -854,14 +909,14 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
   color: var(--muted);
 }
 
-/* ??기술 ?�택�?맞는 빈자�?*/
+/* ??기술 ?�택�?맞는 빈자�?*/
 .seat.e.hl {
   border-color: var(--cyan);
   color: var(--ink);
   background: rgba(0, 162, 199, 0.045);
 }
 
-/* ?�른�?지??�??�태 버튼 */
+/* ?�른�?지??�??�태 버튼 */
 .rrow2 .act {
   display: flex;
   flex-wrap: wrap;
@@ -871,7 +926,7 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
   padding-top: 2px;
 }
 
-/* ?�블�?�??��? ?�면 */
+/* ?�블�?�??��? ?�면 */
 @media (max-width: 640px) {
   .rrow2 {
     grid-template-columns: 28px minmax(0, 1fr);
@@ -891,7 +946,7 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
 }
 
 
-/* 모집글 ?�세 - ?�단 ?�목 ?�역 개선 */
+/* 모집글 ?�세 - ?�단 ?�목 ?�역 개선 */
 .d-meta {
   gap: 10px;
   margin-bottom: 0;
@@ -933,7 +988,7 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
   gap: 8px;
 }
 
-/* ?��? ?�면?�서???�목???�연?�럽�??�시?�도�?조정 */
+/* ?��? ?�면?�서???�목???�연?�럽�??�시?�도�?조정 */
 @media (max-width: 640px) {
   .d-title {
     margin-top: 16px;
@@ -950,9 +1005,9 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
 }
 
 
-/* 모집글 ?�세 - ?�단 ?�목 ?�역 개선 */
+/* 모집글 ?�세 - ?�단 ?�목 ?�역 개선 */
 
-/* ?�성???�보 */
+/* ?�성???�보 */
 .d-meta {
   gap: 10px;
   font-size: 13px;
@@ -963,7 +1018,7 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
   font-size: 14px;
 }
 
-/* 모집글 ?�목 */
+/* 모집글 ?�목 */
 .d-title {
   margin-top: 24px;
   font-size: clamp(38px, 4.2vw, 58px);
@@ -972,7 +1027,7 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
   max-width: 950px;
 }
 
-/* 모집글 ?�개 */
+/* 모집글 ?�개 */
 .d-desc {
   margin-top: 24px;
   max-width: 680px;
@@ -981,12 +1036,12 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
   color: var(--muted);
 }
 
-/* 기술 ?�택 */
+/* 기술 ?�택 */
 .d-stack {
   margin-top: 24px;
 }
 
-/* ?��? ?�면?�서 ?�목 ?�기 조정 */
+/* ?��? ?�면?�서 ?�목 ?�기 조정 */
 @media (max-width: 640px) {
   .d-title {
     font-size: 36px;
@@ -1004,9 +1059,9 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
 }
 
 
-/* 모집글 ?�세 - ?�단 ?�목 ?�역 개선 */
+/* 모집글 ?�세 - ?�단 ?�목 ?�역 개선 */
 
-/* ?�성???�보 */
+/* ?�성???�보 */
 .d-meta {
   gap: 10px;
   font-size: 13px;
@@ -1017,7 +1072,7 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
   font-size: 14px;
 }
 
-/* 모집글 ?�목 */
+/* 모집글 ?�목 */
 .d-title {
   margin-top: 24px;
   font-size: clamp(38px, 4.2vw, 58px);
@@ -1026,7 +1081,7 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
   max-width: 950px;
 }
 
-/* 모집글 ?�개 */
+/* 모집글 ?�개 */
 .d-desc {
   margin-top: 24px;
   max-width: 680px;
@@ -1035,12 +1090,12 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
   color: var(--muted);
 }
 
-/* 기술 ?�택 */
+/* 기술 ?�택 */
 .d-stack {
   margin-top: 24px;
 }
 
-/* ?��? ?�면?�서 ?�목 ?�기 조정 */
+/* ?��? ?�면?�서 ?�목 ?�기 조정 */
 @media (max-width: 640px) {
   .d-title {
     font-size: 36px;
@@ -1058,9 +1113,9 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
 }
 
 
-/* 모집글 ?�세 - ?� ?�성???�널 개선 */
+/* 모집글 ?�세 - ?� ?�성???�널 개선 */
 
-/* ?�널 ?�체 */
+/* ?�널 ?�체 */
 .sidepanel {
   min-height: 320px;
   padding: 24px 20px;
@@ -1078,19 +1133,19 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
   justify-content: flex-start;
 }
 
-/* 기존 �?��???�식 */
+/* 기존 �?��???�식 */
 .sidepanel .glow {
   opacity: 0.08;
   pointer-events: none;
 }
 
-/* ?� ?�성???�목 */
+/* ?� ?�성???�목 */
 .sidepanel > .cap {
   color: var(--muted);
   font-size: 13px;
 }
 
-/* ?�재 모집 ?�원 */
+/* ?�재 모집 ?�원 */
 .sidepanel .num {
   display: block;
   margin-top: 2px;
@@ -1099,14 +1154,14 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
   letter-spacing: -0.045em;
 }
 
-/* ?�체 모집 ?�원 */
+/* ?�체 모집 ?�원 */
 .sidepanel .num small {
   font-size: 16px;
   letter-spacing: -0.02em;
   color: var(--muted);
 }
 
-/* 진행 �?*/
+/* 진행 �?*/
 .bar {
   height: 6px;
   margin-top: 17px;
@@ -1121,7 +1176,7 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
   transition: width 0.4s ease;
 }
 
-/* 모집 ?�세 ?�보 */
+/* 모집 ?�세 ?�보 */
 .kv {
   display: grid;
   grid-template-columns: 76px minmax(0, 1fr);
@@ -1141,7 +1196,7 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
   font-size: 13px;
 }
 
-/* ?�널 번호 */
+/* ?�널 번호 */
 .sidepanel .idx {
   align-self: flex-end;
   margin-top: auto;
@@ -1149,7 +1204,7 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
   font-size: 12px;
 }
 
-/* ?�성???�면 / ?� ?�정 ?�면 버튼 */
+/* ?�성???�면 / ?� ?�정 ?�면 버튼 */
 .pair {
   display: flex;
   flex-wrap: wrap;
@@ -1161,7 +1216,7 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
   text-align: center;
 }
 
-/* ?��? ?�면 */
+/* ?��? ?�면 */
 @media (max-width: 640px) {
   .sidepanel {
     min-height: 0;
