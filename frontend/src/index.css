@@ -177,7 +177,7 @@ nav.top .btn{font-weight:300}
 .post .meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
 .post .meta .who{color:var(--ink)}
 .post h3{font-size:18px;line-height:1.4;letter-spacing:-.03em}
-.post .sum{font-size:13.5px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
+.post .sum{font-size:13.5px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:1;line-clamp:1;-webkit-box-orient:vertical;overflow:hidden}
 .post .foot{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .seats-line{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:12.5px}
 .sg{display:inline-flex;align-items:center;gap:6px}
@@ -305,21 +305,329 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
 .mg{max-width:760px;margin-bottom:48px}
 .mg .head{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;flex-wrap:wrap}
 .mg .head h2{font-size:18px}
-.ap{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:14.4px;border-top:1px solid var(--rule-a);padding:16px 0 20px;align-items:start}
-.ap:last-child{border-bottom:1px solid var(--rule-a)}
-.ap .nm{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:14.5px}
-.ap p{font-size:13.5px;color:var(--muted);margin-top:4px}
-.ap .stk{font-size:12px;margin-top:6px}
-.ap .acts{display:flex;gap:5.4px;flex-wrap:wrap;justify-content:flex-end}
+
+/* 지원자 관리 */
+
+/* 모집 상태 안내 */
+.notice {
+  position: relative;
+  overflow: hidden;
+  max-width: 760px;
+  margin-bottom: 40px;
+  padding: 17px 20px;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--cyan);
+  border-radius: 6px;
+  background: var(--white);
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.7;
+}
+
+.notice b {
+  color: var(--ink);
+  margin-right: 5px;
+}
+
+/* 역할별 지원자 영역 */
+.mg {
+  max-width: 760px;
+  margin-bottom: 32px;
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--white);
+}
+
+/* 역할 제목 */
+.mg .head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 19px 20px;
+  border-bottom: 1px solid var(--rule);
+  background: var(--canvas);
+}
+
+.mg .head .idx {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.mg .head h2 {
+  margin: 0;
+  font-size: 18px;
+  line-height: 1.4;
+  letter-spacing: -.025em;
+}
+
+.mg .head .cap {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* 지원자가 없는 경우 */
+.mg .none {
+  margin: 0;
+  padding: 24px 20px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* 지원자 카드 */
+.ap {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 15px;
+  padding: 20px;
+  border-bottom: 1px solid var(--rule);
+  transition: background .2s ease;
+}
+
+.ap:last-child {
+  border-bottom: 0;
+}
+
+.ap:hover {
+  background: var(--canvas);
+}
+
+/* 지원자 이름과 상태 */
+.ap .nm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.ap .nm .tag {
+  font-size: 11px;
+}
+
+/* 지원 메시지 */
+.ap p {
+  margin-top: 9px;
+  color: var(--muted);
+  font-size: 13.5px;
+  line-height: 1.7;
+  word-break: keep-all;
+}
+
+/* 기술 스택 */
+.ap .stk {
+  margin-top: 12px;
+  font-size: 12px;
+}
+
+/* 관리 버튼 */
+.ap .acts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 7px;
+  max-width: 220px;
+  padding-top: 2px;
+}
+
+/* 모바일 */
+@media (max-width: 640px) {
+  .notice {
+    margin-bottom: 28px;
+    padding: 14px;
+  }
+
+  .mg {
+    margin-bottom: 24px;
+  }
+
+  .mg .head {
+    padding: 16px 14px;
+    gap: 8px;
+  }
+
+  .mg .head .cap {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .ap {
+    grid-template-columns: 38px minmax(0, 1fr);
+    gap: 12px;
+    padding: 17px 14px;
+  }
+
+  .ap .acts {
+    grid-column: 2 / -1;
+    justify-content: flex-start;
+    max-width: none;
+    padding-top: 5px;
+  }
+}
 
 /* 팀 확정 */
-.team-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:40px;align-items:center;padding-block:40px 72px}
-.members{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-right:1px solid var(--rule-a);margin-bottom:72px}
-.mem{border-left:1px solid var(--rule-a);padding:0 8.1px;min-height:200px;display:flex;flex-direction:column;justify-content:space-between;gap:14px}
-.mem h3{font-size:16px;margin-top:10px}
-.chatlink{display:flex;gap:5.4px;flex-wrap:wrap;align-items:center;max-width:760px;margin-bottom:115px}
-.chatlink code{flex:1 1 260px;min-width:0;height:36px;display:flex;align-items:center;padding:0 10.8px;border-radius:3.6px;background:var(--pale);font-family:inherit;font-size:14px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.locked{max-width:760px;border-left:1px solid var(--rule-a);border-right:1px solid var(--rule-a);padding:28px 8.1px;color:var(--muted);display:grid;gap:14px;justify-items:start;margin-bottom:115px}
+
+/* 팀 확정 페이지 */
+.team-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 32px;
+  align-items: center;
+  padding-block: 32px 48px;
+}
+
+/* 팀원 목록 */
+.members {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 44px;
+  background: var(--white);
+}
+
+.mem {
+  min-width: 0;
+  min-height: 165px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  border-left: 1px solid var(--rule);
+  background: var(--white);
+  transition: background .2s ease;
+}
+
+.mem:first-child {
+  border-left: 0;
+}
+
+.mem:hover {
+  background: var(--canvas);
+}
+
+.mem h3 {
+  margin-top: 10px;
+  font-size: 17px;
+  line-height: 1.4;
+  letter-spacing: -.025em;
+}
+
+.mem .cap {
+  display: inline-block;
+  margin-top: 5px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.mem .idx {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* 팀 채팅방 */
+.chatlink,
+.locked {
+  max-width: 760px;
+  padding: 20px;
+  margin-bottom: 80px;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  background: var(--white);
+}
+
+.chatlink {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.chatlink code {
+  flex: 1 1 260px;
+  min-width: 0;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  background: var(--canvas);
+  font-family: inherit;
+  font-size: 13px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.chatlink .pair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.locked {
+  display: grid;
+  gap: 14px;
+  justify-items: start;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* 모바일 */
+@media (max-width: 640px) {
+  .team-top {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-block: 24px 36px;
+  }
+
+  .team-top > *:last-child {
+    justify-self: center;
+  }
+
+  .members {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-bottom: 32px;
+  }
+
+  .mem {
+    min-height: 145px;
+    padding: 15px;
+  }
+
+  .mem:nth-child(odd) {
+    border-left: 0;
+  }
+
+  .mem:nth-child(n+3) {
+    border-top: 1px solid var(--rule);
+  }
+
+  .chatlink,
+  .locked {
+    padding: 15px;
+    margin-bottom: 56px;
+  }
+
+  .chatlink .pair {
+    width: 100%;
+  }
+
+  .chatlink .pair .btn {
+    flex: 1;
+    text-align: center;
+  }
+}
 
 /* 모달 · 채팅 */
 .overlay{position:fixed;inset:0;background:rgba(26,26,26,.28);z-index:50;display:grid;place-items:center;padding:16px}
@@ -432,3 +740,439 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
   .sc-stage{aspect-ratio:3/4}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+
+/* 모집글 ?�세 - ??�� 목록 ?�자??개선 */
+
+/* ??�� 목록 ?�체 */
+.roles {
+  margin-top: 64px;
+}
+
+.roles > .cap {
+  display: block;
+  margin-bottom: 16px;
+  color: var(--muted);
+}
+
+/* ??�� ?�나�??�립??카드�??�시 */
+.rrow2 {
+  display: grid;
+  grid-template-columns: 38px minmax(0, 1fr) auto;
+  gap: 16px;
+  align-items: start;
+
+  padding: 22px 20px;
+  margin-bottom: 12px;
+
+  border: 1px solid var(--rule);
+  border-radius: 7px;
+  background: var(--white);
+
+  transition: border-color 0.2s ease,
+              box-shadow 0.2s ease;
+}
+
+.rrow2:last-child {
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 0;
+}
+
+/* 마우?��? ?�렸????카드 강조 */
+.rrow2:hover {
+  border-color: var(--dim);
+  box-shadow: 0 3px 12px rgba(38, 38, 35, 0.04);
+}
+
+/* ??�� 번호 */
+.rrow2 > .idx {
+  padding-top: 3px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ??�� ?�목�??�원 */
+.role-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.role-head h3 {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.45;
+  letter-spacing: -0.025em;
+}
+
+/* 모집 ?�원 강조 */
+.role-head .cap {
+  padding: 4px 9px;
+  border-radius: 4px;
+  background: var(--pale);
+  color: var(--ink);
+  font-size: 12px;
+}
+
+/* ??기술 ?�택 매칭 */
+.role-head .tag.m {
+  font-size: 11px;
+}
+
+/* ?�요 기술 */
+.rrow2 .rs {
+  margin-top: 10px;
+  color: var(--muted);
+}
+
+/* ?�??�?빈자�?*/
+.seats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 16px;
+}
+
+/* ?�재 참여 중인 ?�??*/
+.seat {
+  min-height: 34px;
+  padding: 3px 11px 3px 5px;
+  border: 1px solid var(--rule);
+  border-radius: 5px;
+  background: var(--canvas);
+  font-size: 12.5px;
+}
+
+/* ?�직 모집 중인 빈자�?*/
+.seat.e {
+  min-height: 34px;
+  padding: 0 13px;
+  border: 1px dashed var(--dim);
+  border-radius: 5px;
+  background: transparent;
+  color: var(--muted);
+}
+
+/* ??기술 ?�택�?맞는 빈자�?*/
+.seat.e.hl {
+  border-color: var(--cyan);
+  color: var(--ink);
+  background: rgba(0, 162, 199, 0.045);
+}
+
+/* ?�른�?지??�??�태 버튼 */
+.rrow2 .act {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 7px;
+  padding-top: 2px;
+}
+
+/* ?�블�?�??��? ?�면 */
+@media (max-width: 640px) {
+  .rrow2 {
+    grid-template-columns: 28px minmax(0, 1fr);
+    padding: 18px 14px;
+    gap: 12px;
+  }
+
+  .rrow2 .act {
+    grid-column: 2 / -1;
+    justify-content: flex-start;
+    padding-top: 8px;
+  }
+
+  .role-head h3 {
+    font-size: 17px;
+  }
+}
+
+
+/* 모집글 ?�세 - ?�단 ?�목 ?�역 개선 */
+.d-meta {
+  gap: 10px;
+  margin-bottom: 0;
+  min-height: 34px;
+}
+
+.d-meta .ink {
+  color: var(--ink);
+  font-size: 14px;
+}
+
+.d-meta .tag {
+  padding: 4px 9px;
+  border-radius: 4px;
+  background: var(--pale);
+}
+
+.d-title {
+  margin-top: 19px;
+  max-width: 950px;
+  line-height: 1.16;
+  letter-spacing: -0.045em;
+  overflow-wrap: anywhere;
+}
+
+.d-desc {
+  margin-top: 20px;
+  max-width: 680px;
+  line-height: 1.65;
+  color: var(--muted);
+}
+
+.d-desc::first-line {
+  color: var(--ink);
+}
+
+.d-stack {
+  margin-top: 20px;
+  gap: 8px;
+}
+
+/* ?��? ?�면?�서???�목???�연?�럽�??�시?�도�?조정 */
+@media (max-width: 640px) {
+  .d-title {
+    margin-top: 16px;
+    line-height: 1.25;
+  }
+
+  .d-desc {
+    margin-top: 16px;
+  }
+
+  .d-stack {
+    margin-top: 16px;
+  }
+}
+
+
+/* 모집글 ?�세 - ?�단 ?�목 ?�역 개선 */
+
+/* ?�성???�보 */
+.d-meta {
+  gap: 10px;
+  font-size: 13px;
+  min-height: 32px;
+}
+
+.d-meta .ink {
+  font-size: 14px;
+}
+
+/* 모집글 ?�목 */
+.d-title {
+  margin-top: 24px;
+  font-size: clamp(38px, 4.2vw, 58px);
+  line-height: 1.2;
+  letter-spacing: -0.045em;
+  max-width: 950px;
+}
+
+/* 모집글 ?�개 */
+.d-desc {
+  margin-top: 24px;
+  max-width: 680px;
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+/* 기술 ?�택 */
+.d-stack {
+  margin-top: 24px;
+}
+
+/* ?��? ?�면?�서 ?�목 ?�기 조정 */
+@media (max-width: 640px) {
+  .d-title {
+    font-size: 36px;
+    line-height: 1.25;
+  }
+
+  .d-desc {
+    font-size: 16px;
+    margin-top: 18px;
+  }
+
+  .d-stack {
+    margin-top: 20px;
+  }
+}
+
+
+/* 모집글 ?�세 - ?�단 ?�목 ?�역 개선 */
+
+/* ?�성???�보 */
+.d-meta {
+  gap: 10px;
+  font-size: 13px;
+  min-height: 32px;
+}
+
+.d-meta .ink {
+  font-size: 14px;
+}
+
+/* 모집글 ?�목 */
+.d-title {
+  margin-top: 24px;
+  font-size: clamp(38px, 4.2vw, 58px);
+  line-height: 1.2;
+  letter-spacing: -0.045em;
+  max-width: 950px;
+}
+
+/* 모집글 ?�개 */
+.d-desc {
+  margin-top: 24px;
+  max-width: 680px;
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+/* 기술 ?�택 */
+.d-stack {
+  margin-top: 24px;
+}
+
+/* ?��? ?�면?�서 ?�목 ?�기 조정 */
+@media (max-width: 640px) {
+  .d-title {
+    font-size: 36px;
+    line-height: 1.25;
+  }
+
+  .d-desc {
+    font-size: 16px;
+    margin-top: 18px;
+  }
+
+  .d-stack {
+    margin-top: 20px;
+  }
+}
+
+
+/* 모집글 ?�세 - ?� ?�성???�널 개선 */
+
+/* ?�널 ?�체 */
+.sidepanel {
+  min-height: 320px;
+  padding: 24px 20px;
+  gap: 22px;
+
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+
+  background: linear-gradient(
+    145deg,
+    var(--white) 55%,
+    rgba(0, 162, 199, 0.055)
+  );
+
+  justify-content: flex-start;
+}
+
+/* 기존 �?��???�식 */
+.sidepanel .glow {
+  opacity: 0.08;
+  pointer-events: none;
+}
+
+/* ?� ?�성???�목 */
+.sidepanel > .cap {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* ?�재 모집 ?�원 */
+.sidepanel .num {
+  display: block;
+  margin-top: 2px;
+  font-size: 52px;
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+}
+
+/* ?�체 모집 ?�원 */
+.sidepanel .num small {
+  font-size: 16px;
+  letter-spacing: -0.02em;
+  color: var(--muted);
+}
+
+/* 진행 �?*/
+.bar {
+  height: 6px;
+  margin-top: 17px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: var(--pale);
+}
+
+.bar i {
+  border-radius: 10px;
+  background: var(--cyan);
+  transition: width 0.4s ease;
+}
+
+/* 모집 ?�세 ?�보 */
+.kv {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr);
+  gap: 12px 10px;
+  padding-top: 18px;
+  border-top: 1px solid var(--rule);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.kv dt {
+  color: var(--muted);
+}
+
+.kv dd {
+  color: var(--ink);
+  font-size: 13px;
+}
+
+/* ?�널 번호 */
+.sidepanel .idx {
+  align-self: flex-end;
+  margin-top: auto;
+  color: var(--dim);
+  font-size: 12px;
+}
+
+/* ?�성???�면 / ?� ?�정 ?�면 버튼 */
+.pair {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.pair .btn {
+  flex: 1;
+  text-align: center;
+}
+
+/* ?��? ?�면 */
+@media (max-width: 640px) {
+  .sidepanel {
+    min-height: 0;
+    padding: 22px 18px;
+  }
+
+  .sidepanel .num {
+    font-size: 44px;
+  }
+
+  .sidepanel .idx {
+    margin-top: 0;
+  }
+}
