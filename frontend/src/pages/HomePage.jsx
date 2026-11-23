@@ -17,7 +17,7 @@ export default function HomePage() {
         <p className="statement">
           <b>좋은 아이디어는 많아요. 그런데 같이 할 사람을 찾기가 어려워요.</b>{' '}
           단톡방 공지는 금방 묻히고, 누가 어떤 역할을 할 수 있는지 한눈에 보이지 않아요.
-          NETogether는 필요한 역할과 빈자리를 먼저 보여 줘요.
+          넷츠모아는 필요한 역할과 빈자리를 먼저 보여 줘요.
         </p>
       </section>
       <FeatureIntro />
