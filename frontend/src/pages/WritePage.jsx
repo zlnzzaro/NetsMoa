@@ -7,8 +7,8 @@ import Icon from '../components/common/Icon'
 import { createPost } from '../api/posts'
 import { CATEGORY, ROLE } from '../constants/codes'
 import { useToast } from '../context/ToastContext'
+import { splitComma } from '../utils/post'
 
-const splitComma = (s) => s.split(',').map((x) => x.trim()).filter(Boolean)
 let rowKey = 0
 const newRow = (roleCode = '', capacity = 1, skills = '') => ({ key: rowKey++, roleCode, capacity, skills })
 

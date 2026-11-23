@@ -2,6 +2,9 @@
 // api/posts.js 가 돌려주는 "화면용 모집글" 모양을 기준으로 해요.
 import { ROLE, CATEGORY } from '../constants/codes'
 
+// 'React, Java ,  ' → ['React', 'Java'] (쉼표로 나누고 빈칸은 버려요)
+export const splitComma = (s) => s.split(',').map((x) => x.trim()).filter(Boolean)
+
 // 역할 하나에 이미 들어온 인원 수 (작성자 + 합류 확정된 사람)
 export const filledOf = (role) => role.members.length
 
