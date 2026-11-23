@@ -5,7 +5,7 @@
 export const ME_ID = 'u-yujin'
 
 export const users = [
-  { id: 'u-yujin', nickname: '유진', bio: '컴퓨터학부 2학년 · 프론트엔드', skills: ['React', 'JavaScript', 'Figma'] },
+  { id: 'u-yujin', email: 'yujin@example.com', studentId: '2025012345', nickname: '유진', bio: '컴퓨터학부 2학년 · 프론트엔드', skills: ['React', 'JavaScript', 'Figma'] },
   { id: 'u-seojun', nickname: '박서준', bio: '', skills: ['React', 'TypeScript'] },
   { id: 'u-doyun', nickname: '이도윤', bio: '', skills: ['Java', 'Spring Boot'] },
   { id: 'u-harin', nickname: '최하린', bio: '', skills: ['React', 'CSS'] },
