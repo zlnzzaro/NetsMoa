@@ -285,6 +285,18 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
 .role-card .ds{font-size:12px;color:var(--muted)}
 .role-card.on{background:var(--ink);color:var(--canvas)}
 .role-card.on .no,.role-card.on .ds{color:var(--dim)}
+/* 기술스택 상자 (SkillPicker): 분야별로 네모 상자, 고르면 진한 배경 */
+.skill-pick{display:grid;gap:12px}
+.skill-group{display:grid;gap:6px}
+.skill-group .gname{font-size:12px;color:var(--muted)}
+.skill-group .boxes{display:flex;flex-wrap:wrap;gap:6px}
+.skill-box{height:34px;min-width:72px;padding:0 12px;border:0;border-radius:3px;background:var(--white);outline:1px solid var(--rule);outline-offset:-1px;color:var(--ink);font:inherit;font-size:13px;cursor:pointer;white-space:nowrap}
+.skill-box:hover{background:var(--pale)}
+.skill-box.on{background:var(--ink);outline-color:var(--ink);color:var(--canvas)}
+/* 테두리를 outline 으로 그려서, 키보드 초점 표시를 다시 넣어 줘요 */
+.skill-box:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.skill-add{display:flex;gap:6px;border-top:1px solid var(--rule-a);padding-top:12px}
+.skill-add .inp{flex:1;min-width:0}
 
 /* 지원자 관리 */
 .notice{position:relative;overflow:hidden;border-left:1px solid var(--rule-a);border-right:1px solid var(--rule-a);padding:14px 8.1px;margin-bottom:56px;font-size:13.5px;color:var(--muted);max-width:760px}
