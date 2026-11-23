@@ -4,6 +4,7 @@
 import { useState } from 'react'
 import RolePicker from './RolePicker'
 import SkillPicker from './SkillPicker'
+import { MAX_SKILLS } from '../../constants/codes'
 import { useMe } from '../../context/MeContext'
 import { useToast } from '../../context/ToastContext'
 
@@ -23,7 +24,7 @@ export default function ProfileForm({ me, onSaved, onCancel }) {
   const nickOk = nick.length >= 2 && nick.length <= 12
   const changed = nick !== me.nickname || bio.trim() !== (me.bio || '') || skills.join(',') !== me.skills.join(',') ||
     roles.join(',') !== me.roles.join(',')
-  const canSave = nickOk && changed && !saving
+  const canSave = nickOk && skills.length <= MAX_SKILLS && changed && !saving
 
   const submit = async (e) => {
     e.preventDefault()
@@ -70,7 +71,7 @@ export default function ProfileForm({ me, onSaved, onCancel }) {
         <span className="lab" id="me-skills">기술스택</span>
         <div>
           <SkillPicker value={skills} onChange={setSkills} labelledBy="me-skills" />
-          <small>여러 개 고를 수 있어요 · 지금 {skills.length}개 골랐어요</small>
+          <small>{MAX_SKILLS}개까지 고를 수 있어요 · 지금 {skills.length}개 골랐어요</small>
         </div>
       </div>
       <div className="frow">
