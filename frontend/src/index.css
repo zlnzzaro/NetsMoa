@@ -276,6 +276,15 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
 .icon-btn:hover{background:var(--pale);color:var(--ink)}
 .err{color:var(--red);font-size:13px;margin-top:14px}
 .form-foot{margin-top:21.6px}
+/* 희망 역할 카드 (RolePicker): 세로 줄로 나눈 4칸, 그림자 없음 */
+.role-pick{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-right:1px solid var(--rule-a)}
+.role-card{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0;padding:10px 12px 12px;border:0;border-left:1px solid var(--rule-a);border-radius:0;background:transparent;color:var(--ink);font:inherit;text-align:left;cursor:pointer}
+.role-card:hover{background:var(--pale)}
+.role-card .no{font-size:12px;color:var(--dim)}
+.role-card .nm{font-size:15px;letter-spacing:-.02em}
+.role-card .ds{font-size:12px;color:var(--muted)}
+.role-card.on{background:var(--ink);color:var(--canvas)}
+.role-card.on .no,.role-card.on .ds{color:var(--dim)}
 
 /* 지원자 관리 */
 .notice{position:relative;overflow:hidden;border-left:1px solid var(--rule-a);border-right:1px solid var(--rule-a);padding:14px 8.1px;margin-bottom:56px;font-size:13.5px;color:var(--muted);max-width:760px}
@@ -355,6 +364,8 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
   .wbtn span{display:none}
   .frow{grid-template-columns:1fr;gap:4px}
   .frow>label,.frow>.lab{padding-top:0}
+  .role-pick{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .role-card{border-bottom:1px solid var(--rule-a)}
   .rrow{grid-template-columns:minmax(0,1fr) 64px}
   .rrow .rs{grid-column:1/2}
   .rrow2{grid-template-columns:28px minmax(0,1fr)}
