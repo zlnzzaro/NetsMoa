@@ -1,0 +1,13 @@
+{
+  "name": "@moa/backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.16",
+    "vitest": "^4.1.12"
+  }
+}
