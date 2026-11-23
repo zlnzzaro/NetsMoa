@@ -9,10 +9,10 @@ import { useMe } from '../context/MeContext'
 import { useToast } from '../context/ToastContext'
 
 // 발표·심사용 시연 계정 (backend/supabase/seed.sql 로 만들어져요)
-const DEMO_PASSWORD = 'netogether1234'
+const DEMO_PASSWORD = 'netsmoa1234'
 const DEMO_ACCOUNTS = [
-  { email: 'yujin@netogether.dev', label: '지원자(유진)로 둘러보기' },
-  { email: 'seojun@netogether.dev', label: '작성자(박서준)로 둘러보기' },
+  { email: 'yujin@netsmoa.dev', label: '지원자(유진)로 둘러보기' },
+  { email: 'seojun@netsmoa.dev', label: '작성자(박서준)로 둘러보기' },
 ]
 
 const isStrong = (pw) => pw.length >= 8 && /[A-Za-z]/.test(pw) && /\d/.test(pw)
