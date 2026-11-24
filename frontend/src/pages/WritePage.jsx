@@ -2,12 +2,14 @@
 // 역할은 DB 코드(FRONTEND, BACKEND ...) 중에서 고르고, 한 글 안에서 같은 역할은 한 번만 쓸 수 있어요.
 // 첫 번째 역할은 작성자 본인 자리로 들어가요.
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import Icon from '../components/common/Icon'
 import { createPost } from '../api/posts'
 import { CATEGORY, ROLE } from '../constants/codes'
 import { useToast } from '../context/ToastContext'
 import { splitComma } from '../utils/post'
+import { useMe } from '../context/MeContext'
+import { isDemoMode } from '../lib/supabase'
 
 let rowKey = 0
 const newRow = (roleCode = '', capacity = 1, skills = '') => ({ key: rowKey++, roleCode, capacity, skills })
@@ -18,6 +20,10 @@ export default function WritePage() {
   const [form, setForm] = useState({ title: '', category: 'SIDE_PROJECT', description: '', techStack: '', deadline: '', chatUrl: '' })
   const [rows, setRows] = useState([newRow('FRONTEND', 2, 'React'), newRow('BACKEND', 1, 'Spring Boot')])
   const [error, setError] = useState('')
+  const [saving, setSaving] = useState(false)
+  const { isGuest } = useMe()
+
+  if (isGuest) return <Navigate to="/login?next=/write" replace />
 
   // form 값 하나 바꾸기: set('title')(이벤트)
   const set = (field) => (e) => setForm({ ...form, [field]: e.target.value })
@@ -26,19 +32,29 @@ export default function WritePage() {
   const submit = async (e) => {
     e.preventDefault()
     const roles = rows.filter((r) => r.roleCode)
+    if (saving) return
     if (!form.title.trim()) return setError('제목을 입력해 주세요.')
+    if (form.chatUrl.trim() && !/^https?:\/\/\S+$/.test(form.chatUrl.trim())) return setError('팀 채팅 링크는 https:// 로 시작하는 주소로 적어 주세요.')
     if (roles.length === 0) return setError('역할을 하나 이상 골라 주세요.')
     if (new Set(roles.map((r) => r.roleCode)).size !== roles.length) return setError('같은 역할이 두 번 들어갔어요. 인원 수로 조절해 주세요.')
 
-    const post = await createPost({
+    setSaving(true)
+    setError('')
+    let post
+    try {
+      post = await createPost({
       title: form.title.trim(),
       category: form.category,
       description: form.description.trim() || '소개가 아직 없어요.',
       techStack: splitComma(form.techStack),
       deadline: form.deadline || null,
-      chatUrl: form.chatUrl.trim() || 'https://discord.gg/my-team',
-      roles: roles.map((r) => ({ roleCode: r.roleCode, capacity: Math.max(1, Number(r.capacity) || 1), skills: splitComma(r.skills) })),
-    })
+      chatUrl: form.chatUrl.trim() || (isDemoMode ? 'https://discord.gg/my-team' : ''),
+      roles: roles.map((r) => ({ roleCode: r.roleCode, capacity: Math.min(10, Math.max(1, Number(r.capacity) || 1)), skills: splitComma(r.skills) })),
+      })
+    } catch (err) {
+      setSaving(false)
+      return setError(err.message)
+    }
     toast('모집글을 등록했어요')
     navigate(`/posts/${post.id}`)
   }
@@ -114,7 +130,7 @@ export default function WritePage() {
 
         {error && <p className="err">{error}</p>}
         <div className="pair form-foot">
-          <button className="btn p">등록하기</button>
+          <button className="btn p" disabled={saving}>{saving ? '등록 중…' : '등록하기'}</button>
           <Link className="btn s" to="/">취소</Link>
         </div>
       </form>

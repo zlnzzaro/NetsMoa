@@ -10,12 +10,13 @@ import { filledTotalOf, pad2, roleLabel, totalOf } from '../utils/post'
 import { useMe } from '../context/MeContext'
 import { useToast } from '../context/ToastContext'
 import NotFound from './NotFound'
+import { isDemoMode } from '../lib/supabase'
 
 export default function TeamPage() {
   const { id } = useParams()
   const { me } = useMe()
   const toast = useToast()
-  const { data: post, error } = useLoad(() => getPost(id), [id])
+  const { data: post, error } = useLoad(() => getPost(id), [id, me.id])
 
   if (error) return <NotFound />
   if (!post) return null
@@ -60,7 +61,9 @@ export default function TeamPage() {
         <h2 className="heading">팀 채팅방</h2>
         <span className="cap">{post.isMember ? '팀원끼리 이야기하는 곳이에요' : '합류가 확정되면 링크가 열려요'}</span>
       </div>
-      {post.isMember ? (
+      {post.isMember && !post.chatUrl ? (
+        <div className="locked"><span>작성자가 아직 팀 채팅 링크를 넣지 않았어요.</span></div>
+      ) : post.isMember ? (
         <div className="chatlink">
           <code>{post.chatUrl}</code>
           <div className="pair">
@@ -71,7 +74,7 @@ export default function TeamPage() {
       ) : (
         <div className="locked">
           <span>작성자가 합류를 확정하면 채팅방 링크가 여기에 보여요.</span>
-          <Link className="btn s" to={`/posts/${post.id}/manage`}>작성자 화면에서 확정해 보기</Link>
+          {isDemoMode && <Link className="btn s" to={`/posts/${post.id}/manage`}>작성자 화면에서 확정해 보기</Link>}
         </div>
       )}
     </div>
