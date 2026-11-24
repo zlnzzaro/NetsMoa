@@ -3,6 +3,7 @@
 
 export const CATEGORY = {
   COMPETITION: '공모전',
+  HACKATHON: '해커톤',
   CAPSTONE: '캡스톤',
   STUDY: '스터디',
   SIDE_PROJECT: '사이드 프로젝트',
