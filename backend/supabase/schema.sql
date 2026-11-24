@@ -430,4 +430,5 @@ grant execute on function
   to authenticated;
 
 -- 실시간 채팅: 메시지와 지원 상태 변경을 구독해요 (RLS 가 그대로 적용돼요)
-alter publication supabase_realtime add table public.messages, public.applications;
+-- 새 모집글 알림: posts INSERT 를 구독해서 내 기술스택과 맞으면 알림을 띄워요
+alter publication supabase_realtime add table public.messages, public.applications, public.posts;

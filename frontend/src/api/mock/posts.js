@@ -48,6 +48,12 @@ export async function getPost(id) {
 }
 
 let seq = 100
+// 체험 모드의 새 글 알림: 같은 탭에서 글을 등록하면 구독자에게 알려 줘요
+const listeners = new Set()
+export function subscribeNewPosts(onPost) {
+  listeners.add(onPost)
+  return () => { listeners.delete(onPost) }
+}
 // 모집글 등록. roles: [{ roleCode, capacity, skills }] — 첫 번째 역할은 작성자 본인 자리예요.
 export async function createPost({ title, category, description, techStack, deadline, chatUrl, roles }) {
   const id = `p-${seq++}`
@@ -58,5 +64,7 @@ export async function createPost({ title, category, description, techStack, dead
   })
   postRoles.push(...roleRows)
   teamSpaces.push({ postId: id, chatUrl })
-  return getPost(id)
+  const post = await getPost(id)
+  listeners.forEach((fn) => fn(post))
+  return post
 }
