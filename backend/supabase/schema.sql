@@ -23,7 +23,7 @@ create table public.posts (
   id              uuid primary key default gen_random_uuid(),
   author_id       uuid not null references public.profiles(id) on delete cascade,
   author_role_id  uuid, -- 작성자 본인 자리 (첫 번째 역할)
-  category        text not null check (category in ('COMPETITION','CAPSTONE','STUDY','SIDE_PROJECT')),
+  category        text not null check (category in ('COMPETITION','HACKATHON','CAPSTONE','STUDY','SIDE_PROJECT')),
   status          text not null default 'OPEN' check (status in ('OPEN','CLOSED')),
   title           text not null check (char_length(title) between 1 and 100),
   description     text not null default '' check (char_length(description) <= 5000),

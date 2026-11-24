@@ -8,6 +8,7 @@
 | `schema.sql` | 테이블, RLS, RPC 함수, 가입 트리거, Realtime 설정 |
 | `school_email.sql` | 회원가입을 학교 이메일(@knu.ac.kr)로만 허용하는 트리거 |
 | `post_manage.sql` | 모집 마감·삭제 RPC. `schema.sql`에 이미 들어 있고, 기존 DB에 이 기능만 추가할 때 실행해요 |
+| `category_hackathon.sql` | 모집글 분류에 해커톤 추가. `schema.sql`에 이미 들어 있고, 기존 DB에 적용할 때 실행해요 |
 | `seed.sql` | 시연용 계정 23개 + 모집글 12개 (`frontend/src/mocks/data.js` 와 같은 내용) |
 
 ## 처음 한 번 설정
