@@ -1,10 +1,11 @@
 // 앱의 뼈대: 어떤 주소에서 어떤 화면을 보여 줄지 정해요.
-// 모든 화면에 상단바(Navbar), 숯색 마무리(Footer), 시연 순서 바(DemoBar)가 붙어요.
+// 모든 화면에 상단바(Navbar), 숯색 마무리(Footer), 시연 순서 바(DemoBar), 새 글 알림(NewPostAlert)이 붙어요.
 import { useEffect, useRef } from 'react'
 import { Outlet, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import DemoBar from './components/layout/DemoBar'
+import NewPostAlert from './components/layout/NewPostAlert'
 import HomePage from './pages/HomePage'
 import BoardPage from './pages/BoardPage'
 import PostDetailPage from './pages/PostDetailPage'
@@ -59,6 +60,7 @@ function Layout() {
       <main><Outlet /></main>
       <Footer />
       <DemoBar />
+      <NewPostAlert />
     </>
   )
 }

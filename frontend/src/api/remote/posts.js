@@ -85,3 +85,15 @@ export async function createPost({ title, category, description, techStack, dead
   })
   return getPost(id)
 }
+
+// 새 모집글이 올라오면 onPost(화면용 모집글) 를 불러요. 돌려준 함수를 부르면 구독을 끊어요.
+// 역할(post_roles)은 같은 트랜잭션에서 들어가서, 알림이 올 때는 이미 읽을 수 있어요.
+export function subscribeNewPosts(onPost) {
+  const channel = supabase
+    .channel(`new-posts-${Math.random().toString(36).slice(2)}`)
+    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'posts' }, ({ new: row }) => {
+      getPost(row.id).then(onPost).catch(() => {})
+    })
+    .subscribe()
+  return () => { supabase.removeChannel(channel) }
+}

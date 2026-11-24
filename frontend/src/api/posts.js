@@ -5,4 +5,4 @@ import { isDemoMode } from '../lib/supabase'
 import * as mock from './mock/posts'
 import * as remote from './remote/posts'
 
-export const { getPosts, getPost, createPost } = isDemoMode ? mock : remote
+export const { getPosts, getPost, createPost, subscribeNewPosts } = isDemoMode ? mock : remote
