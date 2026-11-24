@@ -1,4 +1,4 @@
-// "지금 학부의 모집 현황": 모집 중인 글을 카드로 띄워 옆으로 넘겨 보는 줄.
+// "현재 모집 현황": 모집 중인 글을 카드로 띄워 옆으로 넘겨 보는 줄.
 // 넘기는 법: 화살표 버튼 / 옆 카드 클릭 / 마우스로 끌기 / 폰에서는 손가락으로 밀기.
 // 가운데 카드를 한 번 더 누르면 상세 화면으로 가요.
 // 숫자 4개(모집 중인 팀, 빈 자리, 내 스택과 맞는 자리, 내가 지원한 팀)는 우측 하단에 작게.
@@ -133,7 +133,7 @@ export default function RecruitCarousel({ posts }) {
   return (
     <section className="showcase">
       <div className="frame sec-title">
-        <h2 className="heading">지금 학부의 모집 현황</h2>
+        <h2 className="heading">현재 모집 현황</h2>
         <div className="sc-nav">
           <span className="cap">{pad2(cur + 1)} / {pad2(open.length)}</span>
           <button className="btn s sq" aria-label="이전 모집글" onClick={() => centerTo(cur - 1)}><Icon name="left" /></button>
