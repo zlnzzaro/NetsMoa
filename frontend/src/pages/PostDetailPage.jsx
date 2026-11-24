@@ -8,6 +8,7 @@ import RoleRow from '../components/post/RoleRow'
 import SkillChips from '../components/common/SkillChips'
 import ApplyModal from '../components/application/ApplyModal'
 import ChatDrawer from '../components/application/ChatDrawer'
+import PostOwnerActions from '../components/post/PostOwnerActions'
 import useLoad from '../hooks/useLoad'
 import { getPost } from '../api/posts'
 import { apply, cancel } from '../api/applications'
@@ -105,6 +106,8 @@ export default function PostDetailPage() {
             {(isAuthor || isDemoMode) && <Link className="btn s" to={`/posts/${post.id}/manage`}>지원자 관리</Link>}
             {(post.isMember || isDemoMode) && <Link className="btn s" to={`/posts/${post.id}/team`}>팀 화면</Link>}
           </div>
+          {/* 마감·삭제는 체험 모드에서도 작성자에게만 보여요 */}
+          {isAuthor && <PostOwnerActions post={post} onChanged={reload} />}
         </aside>
       </div>
 

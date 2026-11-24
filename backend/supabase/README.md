@@ -7,6 +7,7 @@
 | --- | --- |
 | `schema.sql` | 테이블, RLS, RPC 함수, 가입 트리거, Realtime 설정 |
 | `school_email.sql` | 회원가입을 학교 이메일(@knu.ac.kr)로만 허용하는 트리거 |
+| `post_manage.sql` | 모집 마감·삭제 RPC. `schema.sql`에 이미 들어 있고, 기존 DB에 이 기능만 추가할 때 실행해요 |
 | `seed.sql` | 시연용 계정 23개 + 모집글 12개 (`frontend/src/mocks/data.js` 와 같은 내용) |
 
 ## 처음 한 번 설정
@@ -47,3 +48,5 @@ VITE_SUPABASE_ANON_KEY=eyJ... 또는 sb_publishable_...
 - **팀 채팅 링크**: `team_spaces`에 있고, 작성자와 확정된 팀원만 볼 수 있어요.
 - **합류 확정(`accept_application`)**: 역할 정원이 차면 남은 지원자를 선발 종료로 바꿔요. 모든 역할이 차면 모집을 마감해요.
 - **되돌리기(`undo_application`)**: 지원을 다시 검토 대기로 바꾸고 모집을 다시 열어요.
+- **모집 마감(`close_post`)**: 작성자만 할 수 있어요. 검토 대기·면담 중인 지원은 선발 종료로 바꿔요.
+- **모집글 삭제(`delete_post`)**: 작성자만, 지원자가 없을 때만 할 수 있어요(취소한 지원은 세지 않아요). 지원자가 있으면 마감만 할 수 있어요.

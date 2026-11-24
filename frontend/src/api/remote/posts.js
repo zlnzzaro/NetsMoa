@@ -97,3 +97,9 @@ export function subscribeNewPosts(onPost) {
     .subscribe()
   return () => { supabase.removeChannel(channel) }
 }
+
+// 모집 마감 (작성자만). 검토 대기·면담 중인 지원은 선발 종료로 바뀌어요.
+export const closePost = (id) => rpc('close_post', { p_post: id })
+
+// 모집글 삭제 (작성자만, 지원자가 없을 때만). 권한·조건 검사는 DB 함수가 해요.
+export const deletePost = (id) => rpc('delete_post', { p_post: id })
