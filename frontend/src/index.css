@@ -725,6 +725,12 @@ textarea.inp{height:auto;min-height:120px;padding:9px 10.8px;resize:vertical;lin
 @media (prefers-reduced-motion:reduce){.np-card{animation:none}}
 @media (max-width:599px){.np-stack{bottom:calc(64px + env(safe-area-inset-bottom,0px))}}
 
+/* 작성자 전용: 모집 마감·글 삭제 */
+.owner-acts{display:grid;gap:8px;margin-top:24px;padding-top:16px;border-top:1px solid var(--rule-a)}
+.btn.s.danger-text{color:var(--red)}
+.btn.danger{background:var(--red);color:var(--white)}
+.btn.danger:hover{background:#a8361f}
+
 /* React 버전에서 추가한 작은 규칙 */
 .ink{color:var(--ink)}
 .role-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}

@@ -71,7 +71,7 @@ export default function ManagePage() {
       <div className="notice">
         {closed && <i className="glow" style={{ background: '#0052ff', opacity: 0.8 }} />}
         {closed
-          ? <><b>모집 마감.</b> 정원이 다 차서 모집이 자동으로 마감됐어요. 남은 지원자는 선발 종료로 바뀌었어요.</>
+          ? <><b>모집 마감.</b> 모집이 마감됐어요. 남은 지원자는 선발 종료로 바뀌었어요.</>
           : <><b>면담 후 합류를 확정하세요.</b> 역할 정원이 차면 남은 지원자는 자동으로 선발 종료돼요.</>}
       </div>
 
